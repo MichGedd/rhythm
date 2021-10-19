@@ -3,4 +3,8 @@ project(rhythm)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(rhythm main.cpp)
+set(SOURCE_FILES
+        "${CMAKE_SOURCE_DIR}/src/main.cpp")
+
+add_executable(rhythm ${SOURCE_FILES})
+include_directories(rhythm include)
