@@ -1,7 +1,7 @@
 # Rhythm
 Description here
 
-##Setup
+## Setup
 1) [Download Qt 5 Open Source Online Installer.](https://www.qt.io/download-qt-installer?hsCtaTracking=99d9dd4f-5681-48d2-b096-470725510d34%7C074ddad0-fdef-4e53-8aa8-5e8a876d6ab4)  
 2) When installing Qt 5, do a custom install.  When on the "Select Components" window, uncheck everything. Next, click
 LTS.  Then open the drop down for Qt -> Qt 5.15.2 -> select the binary you want to download (If you are using CLion on
