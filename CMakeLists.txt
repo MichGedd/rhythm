@@ -11,7 +11,7 @@ find_package(Qt5Network REQUIRED)
 find_package(Qt5NetworkAuth REQUIRED)
 
 set(SOURCE_FILES
-        "${CMAKE_SOURCE_DIR}/src/main.cpp" src/SpotifyOAuth.cpp src/SpotifyOAuth.h src/LoginPage.cpp src/LoginPage.h src/Application.cpp src/Application.h)
+        "${CMAKE_SOURCE_DIR}/src/main.cpp" src/SpotifyOAuth.cpp src/SpotifyOAuth.h src/LoginPage.cpp src/LoginPage.h src/Application.cpp src/Application.h src/HomePage.cpp src/HomePage.h)
 
 add_executable(rhythm ${SOURCE_FILES})
 include_directories(rhythm include)

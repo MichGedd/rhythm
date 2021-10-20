@@ -14,6 +14,7 @@ class LoginPage : public QWidget {
 
 public:
     LoginPage(QWidget *parent = nullptr);
+    SpotifyOAuth *getSpotifyOAuth();
 
 private:
     QPushButton *loginButton;
