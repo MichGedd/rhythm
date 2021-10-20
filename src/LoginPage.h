@@ -9,7 +9,7 @@
 
 #include "SpotifyOAuth.h"
 
-class LoginPage : public QMainWindow {
+class LoginPage : public QWidget {
     Q_OBJECT
 
 public:
