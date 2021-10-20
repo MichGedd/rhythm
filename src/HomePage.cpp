@@ -6,7 +6,7 @@
 
 #include <QLabel>
 
-HomePage::HomePage(QWidget *parent) {
+HomePage::HomePage(QWidget *parent) : QWidget(parent) {
     QLabel *label = new QLabel("Welcome", this);
     label->setGeometry(QRect(QPoint(100, 100), QSize(200, 50)));
 }
