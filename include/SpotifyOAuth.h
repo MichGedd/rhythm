@@ -14,6 +14,8 @@ public:
     SpotifyOAuth(QObject *parent = nullptr);
     SpotifyOAuth(const QString &clientIdentifier, QObject *parent = nullptr);
 
+    QString getToken();
+
 public slots:
     void grant();
 

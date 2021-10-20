@@ -34,3 +34,7 @@ SpotifyOAuth::SpotifyOAuth(const QString &clientIdentifier, QObject *parent) : S
 void SpotifyOAuth::grant() {
     this->oauth2.grant();
 }
+
+QString SpotifyOAuth::getToken() {
+    return this->oauth2.token();
+}

@@ -14,10 +14,10 @@ class LoginPage : public QWidget {
 
 public:
     LoginPage(QWidget *parent = nullptr);
-    SpotifyOAuth *getSpotifyOAuth();
+    LoginPage(SpotifyOAuth *oauth, QWidget *parent = nullptr);
 
 private:
     QPushButton *loginButton;
-    SpotifyOAuth oauth;
+    SpotifyOAuth *oauth;
 
 };

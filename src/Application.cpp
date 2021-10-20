@@ -6,10 +6,13 @@
 #include "LoginPage.h"
 #include "HomePage.h"
 
-Application::Application(QObject *parent) : QObject(parent) {
+#include <iostream>
+
+Application::Application(QObject *parent) : QObject(parent), oauth() {
+
     // Initialize pages
-    LoginPage *loginPage = new LoginPage;
-    connect(loginPage->getSpotifyOAuth(), &SpotifyOAuth::authenticated, this, &Application::loginToMainPage);
+    LoginPage *loginPage = new LoginPage(&oauth);
+    connect(&(this->oauth), &SpotifyOAuth::authenticated, this, &Application::loginToMainPage);
 
     HomePage *homePage = new HomePage;
 

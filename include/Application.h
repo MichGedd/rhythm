@@ -8,6 +8,8 @@
 #include <QWidget>
 #include <QMainWindow>
 
+#include "SpotifyOAuth.h"
+
 
 class Application : public QObject {
     Q_OBJECT
@@ -23,4 +25,6 @@ private:
     QWidget *window;
     QStackedWidget *stackedWidget;
     QVBoxLayout *layout;
+
+    SpotifyOAuth oauth;
 };
