@@ -17,7 +17,7 @@ Application::Application(QObject *parent) : QObject(parent), oauth() {
     HomePage *homePage = new HomePage;
 
     this->window = new QWidget;
-    window->resize(400, 400);
+    window->resize(848, 480);
 
     // Add pages to stacked widget
     this->stackedWidget = new QStackedWidget;

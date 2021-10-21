@@ -9,11 +9,11 @@
 SpotifyOAuth::SpotifyOAuth(QObject *parent) : QObject(parent) {
     QOAuthHttpServerReplyHandler *replyHandler = new QOAuthHttpServerReplyHandler(1234, this);
     this->oauth2.setReplyHandler(replyHandler);
-    this->oauth2.setAuthorizationUrl(QUrl("https://accounts.spotify.com/authorize")); // Probably should make this const
-    this->oauth2.setAccessTokenUrl(QUrl("https://accounts.spotify.com/api/token"));  // Probably should make this const
-    this->oauth2.setScope("user-library-modify user-top-read");  // Make these const
-    this->oauth2.setClientIdentifier("***REMOVED***");  // What to do with secrets?
-    this->oauth2.setClientIdentifierSharedKey("***REMOVED***");
+    this->oauth2.setAuthorizationUrl(QUrl(this->authorizeUrl));
+    this->oauth2.setAccessTokenUrl(QUrl(this->tokenUrl));
+    this->oauth2.setScope(this->scopes);
+    this->oauth2.setClientIdentifier(this->clientID);
+    this->oauth2.setClientIdentifierSharedKey(this->clientSecret);
 
 
     connect(&(this->oauth2), &QOAuth2AuthorizationCodeFlow::statusChanged, [=](QAbstractOAuth::Status status) {

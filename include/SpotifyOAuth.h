@@ -24,4 +24,12 @@ signals:
 
 private:
     QOAuth2AuthorizationCodeFlow oauth2;
+
+    const QString authorizeUrl = "https://accounts.spotify.com/authorize";
+    const QString tokenUrl = "https://accounts.spotify.com/api/token";
+    const QString scopes = "user-library-modify user-top-read";
+
+    // TODO: Find a better way to store secrets.
+    const QString clientID = "***REMOVED***";
+    const QString clientSecret = "***REMOVED***";
 };
