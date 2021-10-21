@@ -5,5 +5,7 @@ QObject {
 QPushButton {
     background-color: rgb(41, 85, 239);
     color: white;
-    
+    text-align: center;
+    border: none;
+    border-radius: 12px;
 }

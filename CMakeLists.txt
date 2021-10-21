@@ -20,3 +20,6 @@ add_executable(rhythm ${HEADER_FILES} ${SOURCE_FILES})
 include_directories(rhythm include)
 
 target_link_libraries(rhythm Qt5::Widgets Qt5::Network  Qt5::NetworkAuth)
+
+add_custom_target(copy_resources COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/resources ${CMAKE_CURRENT_BINARY_DIR}/resources)
+add_dependencies(rhythm copy_resources)

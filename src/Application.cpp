@@ -10,24 +10,21 @@
 
 Application::Application(QObject *parent) : QObject(parent), oauth() {
 
+    // Initialize container
+    this->window = new QWidget;
+    this->window->resize(848, 480);
+    QFile file("resources/main.css");
+    if(!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        return;
+    }
+    QTextStream in(&file);
+    this->window->setStyleSheet(in.readAll());
+
     // Initialize pages
     LoginPage *loginPage = new LoginPage(&oauth);
     connect(&(this->oauth), &SpotifyOAuth::authenticated, this, &Application::loginToMainPage);
 
     HomePage *homePage = new HomePage;
-
-    this->window = new QWidget;
-    this->window->resize(848, 480);
-
-    this->window->setStyleSheet("QObject {\n"
-                                "    background-color: rgb(56, 53, 53);\n"
-                                "}\n"
-                                "\n"
-                                "QPushButton {\n"
-                                "    background-color: rgb(41, 85, 239);\n"
-                                "    color: white;\n"
-                                "    \n"
-                                "}");
 
     // Add pages to stacked widget
     this->stackedWidget = new QStackedWidget;
