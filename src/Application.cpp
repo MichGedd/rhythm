@@ -17,7 +17,17 @@ Application::Application(QObject *parent) : QObject(parent), oauth() {
     HomePage *homePage = new HomePage;
 
     this->window = new QWidget;
-    window->resize(848, 480);
+    this->window->resize(848, 480);
+
+    this->window->setStyleSheet("QObject {\n"
+                                "    background-color: rgb(56, 53, 53);\n"
+                                "}\n"
+                                "\n"
+                                "QPushButton {\n"
+                                "    background-color: rgb(41, 85, 239);\n"
+                                "    color: white;\n"
+                                "    \n"
+                                "}");
 
     // Add pages to stacked widget
     this->stackedWidget = new QStackedWidget;
@@ -26,6 +36,7 @@ Application::Application(QObject *parent) : QObject(parent), oauth() {
 
     this->layout = new QVBoxLayout(window);
     this->layout->addWidget(this->stackedWidget);
+    this->layout->setContentsMargins(0, 0, 0, 0);
 
     window->show();
 }
@@ -33,3 +44,5 @@ Application::Application(QObject *parent) : QObject(parent), oauth() {
 void Application::loginToMainPage() {
     this->stackedWidget->setCurrentIndex(1);
 }
+
+
