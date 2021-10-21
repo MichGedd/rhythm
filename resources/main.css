@@ -9,3 +9,7 @@ QPushButton {
     border: none;
     border-radius: 12px;
 }
+
+QPushButton:hover {
+    background-color: rgb(31, 75, 229);
+}
