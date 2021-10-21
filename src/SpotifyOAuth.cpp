@@ -9,11 +9,11 @@
 SpotifyOAuth::SpotifyOAuth(QObject *parent) : QObject(parent) {
     QOAuthHttpServerReplyHandler *replyHandler = new QOAuthHttpServerReplyHandler(1234, this);
     this->oauth2.setReplyHandler(replyHandler);
-    this->oauth2.setAuthorizationUrl(QUrl(this->authorizeUrl));
-    this->oauth2.setAccessTokenUrl(QUrl(this->tokenUrl));
-    this->oauth2.setScope(this->scopes);
-    this->oauth2.setClientIdentifier(this->clientID);
-    this->oauth2.setClientIdentifierSharedKey(this->clientSecret);
+    this->oauth2.setAuthorizationUrl(QUrl(SpotifyOAuth::AUTHORIZE_URL));
+    this->oauth2.setAccessTokenUrl(QUrl(SpotifyOAuth::TOKEN_URL));
+    this->oauth2.setScope(SpotifyOAuth::SCOPES);
+    this->oauth2.setClientIdentifier(SpotifyOAuth::CLIENT_ID);
+    this->oauth2.setClientIdentifierSharedKey(SpotifyOAuth::CLIENT_SECRET);
 
 
     connect(&(this->oauth2), &QOAuth2AuthorizationCodeFlow::statusChanged, [=](QAbstractOAuth::Status status) {
@@ -25,10 +25,6 @@ SpotifyOAuth::SpotifyOAuth(QObject *parent) : QObject(parent) {
     });
 
     connect(&(this->oauth2), &QOAuth2AuthorizationCodeFlow::authorizeWithBrowser, &QDesktopServices::openUrl);
-}
-
-SpotifyOAuth::SpotifyOAuth(const QString &clientIdentifier, QObject *parent) : SpotifyOAuth(parent) {
-    this->oauth2.setClientIdentifier(clientIdentifier);
 }
 
 void SpotifyOAuth::grant() {

@@ -12,7 +12,7 @@ Application::Application(QObject *parent) : QObject(parent), oauth() {
 
     // Initialize container
     this->window = new QWidget;
-    this->window->resize(848, 480);
+    this->window->resize(Application::APPLICATION_WIDTH, Application::APPLICATION_HEIGHT);
     QFile file("resources/main.css");
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         return;

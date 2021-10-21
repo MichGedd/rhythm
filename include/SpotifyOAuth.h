@@ -12,7 +12,6 @@ class SpotifyOAuth : public QObject {
     Q_OBJECT
 public:
     SpotifyOAuth(QObject *parent = nullptr);
-    SpotifyOAuth(const QString &clientIdentifier, QObject *parent = nullptr);
 
     QString getToken();
 
@@ -23,13 +22,13 @@ signals:
     void authenticated();
 
 private:
-    QOAuth2AuthorizationCodeFlow oauth2;
-
-    const QString authorizeUrl = "https://accounts.spotify.com/authorize";
-    const QString tokenUrl = "https://accounts.spotify.com/api/token";
-    const QString scopes = "user-library-modify user-top-read";
+    const QString AUTHORIZE_URL = "https://accounts.spotify.com/authorize";
+    const QString TOKEN_URL = "https://accounts.spotify.com/api/token";
+    const QString SCOPES = "user-library-modify user-top-read";
 
     // TODO: Find a better way to store secrets.
-    const QString clientID = "***REMOVED***";
-    const QString clientSecret = "***REMOVED***";
+    const QString CLIENT_ID = "***REMOVED***";
+    const QString CLIENT_SECRET = "***REMOVED***";
+
+    QOAuth2AuthorizationCodeFlow oauth2;
 };

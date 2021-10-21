@@ -22,9 +22,11 @@ private slots:
     void loginToMainPage();
 
 private:
+    const static int APPLICATION_WIDTH = 848;
+    const static int APPLICATION_HEIGHT = 480;
+
     QWidget *window;
     QStackedWidget *stackedWidget;
     QVBoxLayout *layout;
-
     SpotifyOAuth oauth;
 };
