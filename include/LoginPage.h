@@ -13,7 +13,6 @@ class LoginPage : public QWidget {
     Q_OBJECT
 
 public:
-    LoginPage(QWidget *parent = nullptr);
     LoginPage(SpotifyOAuth *oauth, QWidget *parent = nullptr);
 
 private:

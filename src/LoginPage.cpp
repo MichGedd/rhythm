@@ -4,10 +4,6 @@
 
 #include "LoginPage.h"
 
-LoginPage::LoginPage(QWidget *parent) : QWidget(parent), oauth() {
-    // TODO Delete
-}
-
 LoginPage::LoginPage(SpotifyOAuth *oauth, QWidget *parent) : QWidget(parent) {
     this->oauth = oauth;
     this->loginButton = new QPushButton("Login", this);
