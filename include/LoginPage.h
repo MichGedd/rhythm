@@ -16,6 +16,7 @@ public:
     LoginPage(SpotifyOAuth *oauth, QWidget *parent = nullptr);
 
 private:
+    QLabel *label;
     QPushButton *loginButton;
     SpotifyOAuth *oauth;
 
