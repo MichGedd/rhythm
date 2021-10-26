@@ -11,10 +11,10 @@ find_package(Qt5Network REQUIRED)
 find_package(Qt5NetworkAuth REQUIRED)
 
 set(SOURCE_FILES
-        src/main.cpp src/SpotifyOAuth.cpp src/LoginPage.cpp src/Application.cpp src/HomePage.cpp)
+        src/main.cpp src/SpotifyOAuth.cpp src/LoginPage.cpp src/Application.cpp src/HomePage.cpp src/NavBar.cpp)
 
 set(HEADER_FILES
-        include/Application.h include/HomePage.h include/LoginPage.h include/SpotifyOAuth.h)
+        include/Application.h include/HomePage.h include/LoginPage.h include/SpotifyOAuth.h include/NavBar.h)
 
 add_executable(rhythm ${HEADER_FILES} ${SOURCE_FILES})
 include_directories(rhythm include)

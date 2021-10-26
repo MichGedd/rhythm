@@ -2,6 +2,10 @@ QObject {
     background-color: rgb(56, 53, 53);
 }
 
+QObject#navBar {
+    border-bottom: 5px solid rgb(41, 85, 239);
+}
+
 QPushButton {
     background-color: rgb(41, 85, 239);
     color: white;

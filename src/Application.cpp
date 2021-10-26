@@ -17,6 +17,8 @@ Application::Application(QObject *parent) : QObject(parent), oauth() {
     }
     QTextStream in(&file);
     this->window->setStyleSheet(in.readAll());
+    this->navBar = new NavBar(window);
+    this->navBar->raise();
 
     // Initialize pages
     LoginPage *loginPage = new LoginPage(&oauth);
@@ -33,11 +35,13 @@ Application::Application(QObject *parent) : QObject(parent), oauth() {
     this->layout->addWidget(this->stackedWidget);
     this->layout->setContentsMargins(0, 0, 0, 0);
 
+    this->navBar->raise();  // Raise the navbar to the top of the screen
     window->show();
 }
 
 void Application::loginToMainPage() {
     this->stackedWidget->setCurrentIndex(1);
+    this->navBar->show();
 }
 
 

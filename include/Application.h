@@ -8,6 +8,7 @@
 #include <QWidget>
 #include <QMainWindow>
 #include <SpotifyOAuth.h>
+#include <NavBar.h>
 
 
 class Application : public QObject {
@@ -27,4 +28,5 @@ private:
     QStackedWidget *stackedWidget;
     QVBoxLayout *layout;
     SpotifyOAuth oauth;
+    NavBar *navBar;
 };
