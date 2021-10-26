@@ -6,8 +6,7 @@
 
 #include <QtWidgets>
 #include <QMainWindow>
-
-#include "SpotifyOAuth.h"
+#include <SpotifyOAuth.h>
 
 class LoginPage : public QWidget {
     Q_OBJECT

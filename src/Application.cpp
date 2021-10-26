@@ -2,9 +2,9 @@
 // Created by micha on 2021-10-19.
 //
 
-#include "Application.h"
-#include "LoginPage.h"
-#include "HomePage.h"
+#include <Application.h>
+#include <LoginPage.h>
+#include <HomePage.h>
 
 #include <iostream>
 

@@ -1,8 +1,5 @@
 #include <QWidget>
-
-#include "Application.h"
-
-#include "LoginPage.h"
+#include <Application.h>
 
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);

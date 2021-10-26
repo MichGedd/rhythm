@@ -1,10 +1,9 @@
 //
 // Created by micha on 2021-10-18.
 //
+#include <SpotifyOAuth.h>
 #include <QtGui>
 #include <QtNetworkAuth>
-
-#include "SpotifyOAuth.h"
 
 SpotifyOAuth::SpotifyOAuth(QObject *parent) : QObject(parent) {
     QOAuthHttpServerReplyHandler *replyHandler = new QOAuthHttpServerReplyHandler(1234, this);

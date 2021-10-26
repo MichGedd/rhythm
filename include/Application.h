@@ -7,8 +7,7 @@
 #include <QtWidgets>
 #include <QWidget>
 #include <QMainWindow>
-
-#include "SpotifyOAuth.h"
+#include <SpotifyOAuth.h>
 
 
 class Application : public QObject {

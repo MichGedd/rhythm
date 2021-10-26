@@ -2,8 +2,7 @@
 // Created by micha on 2021-10-19.
 //
 
-#include "HomePage.h"
-
+#include <HomePage.h>
 #include <QLabel>
 
 HomePage::HomePage(QWidget *parent) : QWidget(parent) {

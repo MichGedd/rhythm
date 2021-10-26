@@ -2,8 +2,8 @@
 // Created by micha on 2021-10-19.
 //
 
-#include "LoginPage.h"
-#include "Application.h"
+#include <LoginPage.h>
+#include <Application.h>
 
 LoginPage::LoginPage(SpotifyOAuth *oauth, QWidget *parent) : QWidget(parent) {
 
