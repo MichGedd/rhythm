@@ -1,11 +1,9 @@
-#include <iostream>
-#include <QtWidgets>
+#include <QWidget>
+#include <Application.h>
 
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
-    QWidget window;
-    window.resize(320, 240);
-    window.show();
-    window.setWindowTitle(QApplication::translate("toplevel", "Top Level Widget"));
+
+    Application application;
     return app.exec();
 }
