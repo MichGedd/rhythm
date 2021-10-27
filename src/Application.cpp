@@ -16,9 +16,11 @@ Application::Application(QObject *parent) : QObject(parent), oauth() {
         return;
     }
     QTextStream in(&file);
+
     this->window->setStyleSheet(in.readAll());
     this->navBar = new NavBar(window);
     this->navBar->raise();
+    connect(this->navBar, &NavBar::logout, this, &Application::logout);
 
     // Initialize pages
     LoginPage *loginPage = new LoginPage(&oauth);
@@ -43,5 +45,11 @@ void Application::loginToMainPage() {
     this->stackedWidget->setCurrentIndex(1);
     this->navBar->show();
 }
+
+void Application::logout() {
+    this->stackedWidget->setCurrentIndex(0);
+    this->navBar->hide();
+}
+
 
 

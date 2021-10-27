@@ -22,6 +22,7 @@ public:
 
 private slots:
     void loginToMainPage();
+    void logout();
 
 private:
     QWidget *window;

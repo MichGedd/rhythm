@@ -10,6 +10,12 @@ class NavBar : public QFrame {
 
 public:
     NavBar(QWidget *parent = nullptr);
+
+signals:
+    void logout();
+
+private slots:
+    void logoutButtonPressed();
     
 private:
     QPushButton *createPlaylist;
