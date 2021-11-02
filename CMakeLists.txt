@@ -14,7 +14,7 @@ set(SOURCE_FILES
         src/main.cpp src/SpotifyOAuth.cpp src/LoginPage.cpp src/Application.cpp src/HomePage.cpp)
 
 set(HEADER_FILES
-        include/Application.h include/HomePage.h include/LoginPage.h include/SpotifyOAuth.h)
+        include/Application.h include/HomePage.h include/LoginPage.h include/SpotifyOAuth.h src/EndPointTestPage.cpp include/EndPointTestPage.h)
 
 add_executable(rhythm ${HEADER_FILES} ${SOURCE_FILES})
 include_directories(rhythm include)

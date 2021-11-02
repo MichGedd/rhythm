@@ -6,6 +6,8 @@
 #include <LoginPage.h>
 #include <HomePage.h>
 
+#include <iostream>
+
 Application::Application(QObject *parent) : QObject(parent), oauth() {
 
     // Initialize container
