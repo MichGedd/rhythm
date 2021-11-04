@@ -55,20 +55,70 @@ QString SpotifyOAuth::getToken() {
     return this->oauth2.token();
 }
 
-//void SpotifyOAuth::onGetUserInfo() {
-//    QUrl u ("https://api.spotify.com/v1/me");
-//
-//    auto reply = oauth2.get(u);
-//
-//    connect(reply, &QNetworkReply::finished, [=]() {
-//        if (reply->error() != QNetworkReply::NoError) {
-//            printf("ERROR IN NETWORK CONNECT");
-//            return;
-//        }
-//        const auto data = reply->readAll();
-//        const auto document = QJsonDocument::fromJson(data);
-//        const auto root = document.object();
-//        const auto userName = root.value("id").toString();
+void SpotifyOAuth::onGetUserInfo() {
+    QUrl u ("https://api.spotify.com/v1/me");
+
+    auto reply = oauth2.get(u);
+    connect(reply, &QNetworkReply::finished, [=]() {
+        if (reply->error() != QNetworkReply::NoError) {
+            printf("ERROR IN NETWORK CONNECT");
+            return;
+        }
+        const auto data = reply->readAll();
+        const auto document = QJsonDocument::fromJson(data);
+        const auto root = document.object();
+        const auto userName = root.value("id").toString().toStdString();
+        std::cout << userName;
+    });
+}
+
+void SpotifyOAuth::onGetRecommendations(){
+
+    QUrl u ("https://api.spotify.com/v1/recommendations");
+    QVariantMap parameters;
+//    QString seed_artists[] = {"4NHQUGzhtTLFvgF5SZesLK"};
+//    QString seed_genres[] = {"classical","country"};
+//    QString seed_tracks[] = {"0c6xIDDpzE81m2q797ordA"};
+    int limit = 1;
+    QString genres = "classical,country";
+    QString artists = "4NHQUGzhtTLFvgF5SZesLK";
+    QString tracks = "0c6xIDDpzE81m2q797ordA";
+//    for (int i = 0; i < seed_genres->length(); i++){
+//        genres = genres + "," + seed_genres[i];
 //    }
-//}
+//    for (int i = 0; i < seed_artists->length(); i++){
+//        artists = artists + "," + seed_artists[i];
+//    }
+//    for (int i = 0; i < seed_tracks->length(); i++){
+//        tracks = tracks + "," + seed_tracks[i];
+//    }
+
+//HOW TO PASS PARAMETERS
+    parameters.insert("seed_genres",genres);
+    parameters.insert("seed_artists",artists);
+    parameters.insert("seed_tracks",tracks);
+    parameters.insert("limit",limit);
+
+//    ["seed_genres"] = genres;
+//    parameters["seed_artists"] = artists;
+//    parameters["seed_tracks"] = tracks;
+//    parameters["limit"] = limit;
+
+
+    auto reply = oauth2.get(u, parameters);
+    connect(reply, &QNetworkReply::finished, [=]() {
+        if (reply->error() != QNetworkReply::NoError) {
+            printf("ERROR IN NETWORK CONNECT");
+            return;
+        }
+
+        const auto data = reply->readAll();
+        const auto document = QJsonDocument::fromJson(data);
+        const auto root = document.object();
+        const auto userName = root.value("tracks").toArray()[0].toObject().value("name").toString();
+
+        std::cout << userName.toStdString();
+    });
+}
+
 

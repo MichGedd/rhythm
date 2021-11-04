@@ -10,13 +10,7 @@
 
 class SpotifyOAuth : public QObject {
     Q_OBJECT
-public:
-    SpotifyOAuth(QObject *parent = nullptr);
 
-    QString getToken();
-
-//    GET function to get all of the users information
-    void onGetUserInfo();
 
 public slots:
     void grant();
@@ -35,13 +29,36 @@ private:
     const QString CLIENT_SECRET = "***REMOVED***";
 
     QOAuth2AuthorizationCodeFlow oauth2;
+
+public:
+    SpotifyOAuth(QObject *parent = nullptr);
+
+    QString getToken();
+
+//TYPE: GET
+//NAME: onGetUserInfo(String id)
+//LINK: https://api.spotify.com/v1/audio-features/{id}
+//PURPOSE: function to get all of the users information. Needed right after login to get the user ID and can pull all other info from there
+//HEADERS: "Authorization:  " "Content-type: application/json"
+    //    GET function to get all of the users information
+    void onGetUserInfo();
+
+//TYPE: GET
+//NAME: onGetRecommendations(String seed_artists, String see_genres, String seed_tracks, int limit)
+//LINK: https://api.spotify.com/v1/recommendations
+//PURPOSE: Will return a list of recommended songs by the features given.  artists, genres, tracks are given above but there are more options
+//HEADERS: "Authorization:  " "Content-type: application/json"
+    void onGetRecommendations();
 };
+
+
 
 //TYPE: GET
 //NAME: getTrackFeatures(String id)
 //LINK: https://api.spotify.com/v1/audio-features/{id}
 //PURPOSE: Get the audio features of a track
 //HEADERS: "Authorization:  " "Content-type: application/json"
+
 
 //TYPE: GET
 //NAME: getMultipleTracksFeatures(String id)
@@ -55,11 +72,6 @@ private:
 //PURPOSE: Get a detailed analysis on a specific track
 //HEADERS: "Authorization:  " "Content-type: application/json"
 
-//TYPE: GET
-//NAME: getRecommendation(String seed_artists, String see_genres, String seed_tracks, int limit)
-//LINK: https://api.spotify.com/v1/recommendations
-//PURPOSE: Will return a list of recommended songs by the features given.  artists, genres, tracks are given above but there are more options
-//HEADERS: "Authorization:  " "Content-type: application/json"
 
 //TYPE: GET
 //NAME: getPlaylist(String id)

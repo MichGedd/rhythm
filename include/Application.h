@@ -21,6 +21,8 @@ public:
 
 private slots:
     void loginToMainPage();
+    void moveToTestPage();
+
 
 private:
     QWidget *window;
