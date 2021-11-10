@@ -5,6 +5,7 @@
 #include <Application.h>
 #include <LoginPage.h>
 #include <HomePage.h>
+#include <CreatePlaylistPage.h>
 
 Application::Application(QObject *parent) : QObject(parent), oauth() {
 
@@ -28,10 +29,13 @@ Application::Application(QObject *parent) : QObject(parent), oauth() {
 
     HomePage *homePage = new HomePage;
 
+    CreatePlaylistPage *createPlaylistPage = new CreatePlaylistPage;
+
     // Add pages to stacked widget
     this->stackedWidget = new QStackedWidget;
     this->stackedWidget->addWidget(loginPage);
     this->stackedWidget->addWidget(homePage);
+    this->stackedWidget->addWidget(createPlaylistPage);
 
     this->layout = new QVBoxLayout(window);
     this->layout->addWidget(this->stackedWidget);
@@ -49,6 +53,9 @@ void Application::loginToMainPage() {
 void Application::logout() {
     this->stackedWidget->setCurrentIndex(0);
     this->navBar->hide();
+
+
+
 }
 
 
