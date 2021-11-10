@@ -23,6 +23,8 @@ public:
 private slots:
     void loginToMainPage();
     void logout();
+    void switchToCreatePlaylist();
+    void switchToSavedPlaylists();
 
 private:
     QWidget *window;

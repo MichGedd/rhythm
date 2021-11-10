@@ -13,9 +13,13 @@ public:
 
 signals:
     void logout();
+    void goToCreatePlaylist();
+    void goToSavedPlaylist();
 
 private slots:
     void logoutButtonPressed();
+    void createPlaylistButtonPressed();
+    void savedPlaylistButtonPressed();
     
 private:
     QPushButton *createPlaylist;
