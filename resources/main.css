@@ -18,6 +18,10 @@ QPushButton:hover {
     background-color: rgb(31, 75, 229);
 }
 
+QPushButton#logo {
+    background-color: rgba(0, 0, 0, 0);
+}
+
 QLabel#title {
     color: rgb(41, 85, 239);
     font-family: "Comic Sans MS";

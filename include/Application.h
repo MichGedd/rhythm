@@ -25,6 +25,7 @@ private slots:
     void logout();
     void switchToCreatePlaylist();
     void switchToSavedPlaylists();
+    void switchToHomePage();
 
 private:
     QWidget *window;

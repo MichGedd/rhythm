@@ -29,7 +29,13 @@ NavBar::NavBar(QWidget *parent) : QFrame(parent) {
     connect(this->savedPlaylists, &QPushButton::released, this, &NavBar::savedPlaylistButtonPressed);
 
 
-
+    int homeButtonX = 10;
+    this->homeButton = new QPushButton(this);
+    this->homeButton->setObjectName("logo");
+    this->homeButton->setIcon(QIcon("resources/logo.png"));
+    this->homeButton->setIconSize(QSize(50, 50));
+    this->homeButton->setGeometry(homeButtonX, buttonY, buttonWidth, buttonHeight);
+    connect(this->homeButton, &QPushButton::released, this, &NavBar::homeButtonPressed);
 }
 
 void NavBar::logoutButtonPressed() {
@@ -42,5 +48,9 @@ void NavBar::createPlaylistButtonPressed() {
 
 void NavBar::savedPlaylistButtonPressed() {
     emit goToSavedPlaylist();
+}
+
+void NavBar::homeButtonPressed() {
+    emit goToHomePage();
 }
 

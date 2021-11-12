@@ -15,15 +15,17 @@ signals:
     void logout();
     void goToCreatePlaylist();
     void goToSavedPlaylist();
+    void goToHomePage();
 
 private slots:
     void logoutButtonPressed();
     void createPlaylistButtonPressed();
     void savedPlaylistButtonPressed();
+    void homeButtonPressed();
     
 private:
     QPushButton *createPlaylist;
     QPushButton *savedPlaylists;
     QPushButton *logoutButton;
-
+    QPushButton *homeButton;
 };

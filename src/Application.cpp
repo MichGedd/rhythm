@@ -24,6 +24,7 @@ Application::Application(QObject *parent) : QObject(parent), oauth() {
     connect(this->navBar, &NavBar::logout, this, &Application::logout);
     connect(this->navBar, &NavBar::goToCreatePlaylist, this, &Application::switchToCreatePlaylist);
     connect(this->navBar, &NavBar::goToSavedPlaylist, this, &Application::switchToSavedPlaylists);
+    connect(this->navBar, &NavBar::goToHomePage, this, &Application::switchToHomePage);
 
     // Initialize pages
     LoginPage *loginPage = new LoginPage(&oauth);
@@ -64,6 +65,11 @@ void Application::switchToCreatePlaylist() {
 void Application::switchToSavedPlaylists() {
     // TODO: Implement Saved Playlists Page
 }
+
+void Application::switchToHomePage() {
+    this->stackedWidget->setCurrentIndex(1);
+}
+
 
 
 
