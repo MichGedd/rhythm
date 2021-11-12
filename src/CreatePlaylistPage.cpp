@@ -3,7 +3,9 @@
 //
 
 #include <CreatePlaylistPage.h>
+#include <QLabel>
 
 CreatePlaylistPage::CreatePlaylistPage(QWidget *parent) : QWidget(parent) {
-    // Put Stuff Here
+    QLabel *label = new QLabel("Create Playlist Page", this);
+    label->setGeometry(QRect(QPoint(100, 100), QSize(200, 50)));
 }
