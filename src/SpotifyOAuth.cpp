@@ -115,9 +115,9 @@ void SpotifyOAuth::onGetRecommendations(){
         const auto data = reply->readAll();
         const auto document = QJsonDocument::fromJson(data);
         const auto root = document.object();
-        const auto userName = root.value("tracks").toArray()[0].toObject().value("name").toString();
+        const auto trackNames = root.value("tracks").toArray()[0].toObject().value("name").toString();
 
-        std::cout << userName.toStdString();
+        std::cout << trackNames.toStdString();
     });
 }
 
