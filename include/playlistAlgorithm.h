@@ -17,6 +17,7 @@ typedef struct dataPoint{
 typedef struct graph{
     string variableName;
     vector<dataPoint> points;
+    bool activeGraph;
 }graph;
 
 class PlaylistGenerator{

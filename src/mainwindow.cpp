@@ -3,7 +3,8 @@
 #include "playlistAlgorithm.h"
 
 int playlistLength =101;
-
+vector<graph> InputGraphs;
+vector<graph> FinalGraphs;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -142,11 +143,10 @@ void MainWindow::plot()
 
 
 
-
-
-
     if(graph->selected()) qDebug() <<  QCPDataSelection(graph->selection()).isEmpty();
     QSlider *tempSlider = ui->slider;
+    QComboBox *myCombo = ui->comboBox;
+    QRadioButton *myRadioButton = ui->radioButton;
 
 
     connect(ui->slider, &QSlider::valueChanged, [graph,tempSlider,customPlot](){
@@ -184,6 +184,124 @@ void MainWindow::plot()
                     qDebug() << "end";
                     qDebug() << "Sum =";
                     qDebug() << sum;
+
+
+     });
+
+connect(ui->comboBox, &QComboBox::currentTextChanged, [graph,tempSlider,customPlot,myCombo,myRadioButton](){
+    qDebug() <<"Combo Box Value Changed =" << myCombo->currentText() << endl ;
+    int length = 36;
+    QVector<double> x, y;
+    struct graph newGraph;
+
+
+
+
+    graph->setData(x, y);
+    graph->rescaleAxes(true);
+    customPlot->replot();
+    qDebug() <<"completed";
+
+
+
+   /* bool foundGraph = false;
+
+    for(int i =0; i<InputGraphs.size(); i++)
+    {
+    if(InputGraphs[i].variableName == myCombo->currentText().toStdString())
+        {
+            InputGraphs[i].points = myDataSet; // Put the points data into the setData function (eg.  graph->setData(x, y) = points but more formal)
+            InputGraphs[i].activeGraph = myRadioButton->isChecked(); //Set the radio button
+            foundGraph = true;
+        }
+    }
+
+if(!foundGraph) // setup new graph if there has not been a graph found
+{
+    int count = 0;
+
+    if(length < NUM_POINTS){
+        x.push_back(0);
+        y.push_back(100);
+        x.push_back(length);
+        y.push_back(100);
+    }
+    else{
+        for(int i = 0; i < length; i += length/NUM_POINTS){
+            x.push_back(i);
+            y.push_back(100);
+            count++;
+        }
+        if(abs(x[count-1] - length) > length/NUM_POINTS*2){
+            x.push_back(length);
+            y.push_back(100);
+            count++;
+        }
+    }
+}*/
+
+});
+
+connect(ui->comboBox, &QComboBox::textHighlighted, [graph,tempSlider,customPlot,myCombo,myRadioButton](){
+        qDebug() <<"Combo Box=";
+
+
+        bool foundGraph = false;
+        int xvalue=0;
+        int yvalue=0;
+        struct graph newGraph;
+        int point = 0;
+        vector<dataPoint> myDataSet;
+
+        //Adds/Updates graph in the vector of graphs
+        QCPGraphDataContainer::const_iterator begin =  graph->data()->at(graph->data()->dataRange().begin()); // get range begin iterator from index
+        QCPGraphDataContainer::const_iterator end =  graph->data()->at(graph->data()->dataRange().end()); // get range end iterator from index
+        for (QCPGraphDataContainer::const_iterator it=begin; it!=end; ++it)
+        {
+           dataPoint initalizedPoint;
+           point++;
+          // iterator "it" will go through all selected data points, as an example, we calculate the value average
+           yvalue = it->value;
+           xvalue= it->mainKey();
+           //qDebug() <<  "Point" << point<< " = (" << xvalue << ","<< yvalue <<")";
+           initalizedPoint.time_minutes = xvalue;
+           initalizedPoint.value = yvalue;
+           myDataSet.push_back(initalizedPoint);
+
+        }
+
+        qDebug() << myCombo->currentText() << endl;
+        if(InputGraphs.empty())
+        {
+
+            newGraph.activeGraph = true;
+            newGraph.variableName = myCombo->currentText().toStdString();
+            newGraph.points = myDataSet;
+            InputGraphs.push_back(newGraph);
+            newGraph.activeGraph = myRadioButton->isChecked();
+
+        }
+
+        else
+        {
+            for(int i =0; i<InputGraphs.size(); i++)
+            {
+            if(InputGraphs[i].variableName == myCombo->currentText().toStdString())
+                {
+                    InputGraphs[i].points = myDataSet;
+                    InputGraphs[i].activeGraph = myRadioButton->isChecked();
+                    foundGraph = true;
+                }
+            }
+        }
+        if(!foundGraph) // if we couldnt find a graph
+        {
+            newGraph.activeGraph = true;
+            newGraph.variableName = myCombo->currentText().toStdString();
+            newGraph.points = myDataSet;
+            InputGraphs.push_back(newGraph);
+            newGraph.activeGraph = myRadioButton->isChecked();
+        }
 
 
      });
@@ -245,7 +363,6 @@ void MainWindow::on_pushButton_2_clicked()
  int yvalue = 0;
  int point = 0;
  graph myGraph;
- vector<graph> InputGraphs;
  vector<dataPoint> myDataSet;
  qDebug() << "HI"; //QCPDataSelection(graph->selection()).dataRanges()
 
