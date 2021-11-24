@@ -33,8 +33,7 @@ Application::Application(QObject *parent) : QObject(parent), oauth() {
 
     HomePage *homePage = new HomePage;
 
-    CreatePlaylistPage *mainWindow = new CreatePlaylistPage;
-    mainWindow->resize(200, 200);
+    CreatePlaylistPage *createPlaylistPage = new CreatePlaylistPage;
 
     SavedPlaylistPage *savedPlaylistPage = new SavedPlaylistPage;
 
@@ -42,7 +41,7 @@ Application::Application(QObject *parent) : QObject(parent), oauth() {
     this->stackedWidget = new QStackedWidget;
     this->stackedWidget->addWidget(loginPage);
     this->stackedWidget->addWidget(homePage);
-    this->stackedWidget->addWidget(mainWindow);
+    this->stackedWidget->addWidget(createPlaylistPage);
     this->stackedWidget->addWidget(savedPlaylistPage);
 
     this->layout = new QVBoxLayout(window);
@@ -52,8 +51,6 @@ Application::Application(QObject *parent) : QObject(parent), oauth() {
     this->navBar->raise();  // Raise the navbar to the top of the screen
     this->navBar->hide();  // Dont show the navbar on login screen
     window->show();
-
-    this->stackedWidget->setCurrentIndex(2);
 }
 
 void Application::loginToMainPage() {

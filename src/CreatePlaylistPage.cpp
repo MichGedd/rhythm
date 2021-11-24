@@ -1,5 +1,5 @@
 #include "CreatePlaylistPage.h"
-#include "ui_mainwindow.h"
+#include "ui_CreatePlaylistPage.h"
 #include "playlistAlgorithm.h"
 
 int playlistLength =36;
@@ -8,7 +8,7 @@ vector<graph> FinalGraphs;
 
 CreatePlaylistPage::CreatePlaylistPage(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+    , ui(new Ui::CreatePlaylistPage)
 {
     ui->setupUi(this);
     qDebug() << 5;

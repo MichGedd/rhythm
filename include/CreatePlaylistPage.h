@@ -3,7 +3,7 @@
 
 #define NUM_POINTS 6
 QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
+namespace Ui { class CreatePlaylistPage; }
 QT_END_NAMESPACE
 
 class CreatePlaylistPage : public QMainWindow
@@ -19,5 +19,5 @@ private slots:
     void on_pushButton_2_clicked();
 
 private:
-    Ui::MainWindow *ui;
+    Ui::CreatePlaylistPage *ui;
 };
