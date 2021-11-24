@@ -1,14 +1,23 @@
-//
-// Created by micha on 2021-11-10.
-//
-
 #pragma once
+#include <QMainWindow>
 
-#include <QWidget>
+#define NUM_POINTS 6
+QT_BEGIN_NAMESPACE
+namespace Ui { class MainWindow; }
+QT_END_NAMESPACE
 
-class CreatePlaylistPage : public QWidget {
-    QOBJECT_H
+class CreatePlaylistPage : public QMainWindow
+{
+    Q_OBJECT
 
 public:
     CreatePlaylistPage(QWidget *parent = nullptr);
+    ~CreatePlaylistPage();
+    void plot();
+
+private slots:
+    void on_pushButton_2_clicked();
+
+private:
+    Ui::MainWindow *ui;
 };

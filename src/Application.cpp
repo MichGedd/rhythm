@@ -5,9 +5,8 @@
 #include <Application.h>
 #include <LoginPage.h>
 #include <HomePage.h>
-#include <CreatePlaylistPage.h>
 #include <SavedPlaylistPage.h>
-#include <mainwindow.h>
+#include <CreatePlaylistPage.h>
 
 Application::Application(QObject *parent) : QObject(parent), oauth() {
 
@@ -34,9 +33,7 @@ Application::Application(QObject *parent) : QObject(parent), oauth() {
 
     HomePage *homePage = new HomePage;
 
-    CreatePlaylistPage *createPlaylistPage = new CreatePlaylistPage;
-
-    MainWindow *mainWindow = new MainWindow;
+    CreatePlaylistPage *mainWindow = new CreatePlaylistPage;
     mainWindow->resize(200, 200);
 
     SavedPlaylistPage *savedPlaylistPage = new SavedPlaylistPage;
@@ -45,7 +42,6 @@ Application::Application(QObject *parent) : QObject(parent), oauth() {
     this->stackedWidget = new QStackedWidget;
     this->stackedWidget->addWidget(loginPage);
     this->stackedWidget->addWidget(homePage);
-    //this->stackedWidget->addWidget(createPlaylistPage);
     this->stackedWidget->addWidget(mainWindow);
     this->stackedWidget->addWidget(savedPlaylistPage);
 

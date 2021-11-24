@@ -13,12 +13,12 @@ find_package(Qt5NetworkAuth REQUIRED)
 find_package(Qt5PrintSupport REQUIRED)
 
 set(SOURCE_FILES
-        src/main.cpp src/SpotifyOAuth.cpp src/LoginPage.cpp src/Application.cpp src/HomePage.cpp src/NavBar.cpp src/CreatePlaylistPage.cpp
-        src/SavedPlaylistPage.cpp include/mainwindow.h include/qcustomplot.h include/playlistAlgorithm.h)
+        src/main.cpp src/SpotifyOAuth.cpp src/LoginPage.cpp src/Application.cpp src/HomePage.cpp src/NavBar.cpp
+        src/SavedPlaylistPage.cpp include/CreatePlaylistPage.h include/qcustomplot.h include/playlistAlgorithm.h)
 
 set(HEADER_FILES
-        include/Application.h include/HomePage.h include/LoginPage.h include/SpotifyOAuth.h include/NavBar.h include/CreatePlaylistPage.h
-        include/SavedPlaylistPage.h src/mainwindow.cpp src/qcustomplot.cpp src/playlistAlgorithm.cpp)
+        include/Application.h include/HomePage.h include/LoginPage.h include/SpotifyOAuth.h include/NavBar.h
+        include/SavedPlaylistPage.h src/CreatePlaylistPage.cpp src/qcustomplot.cpp src/playlistAlgorithm.cpp)
 
 add_executable(rhythm ${HEADER_FILES} ${SOURCE_FILES})
 include_directories(rhythm include)
