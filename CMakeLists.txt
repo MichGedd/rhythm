@@ -5,6 +5,7 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
+set(CMAKE_CXX_FLAGS -w)
 
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5Network REQUIRED)

@@ -7,6 +7,7 @@
 #include <HomePage.h>
 #include <CreatePlaylistPage.h>
 #include <SavedPlaylistPage.h>
+#include <mainwindow.h>
 
 Application::Application(QObject *parent) : QObject(parent), oauth() {
 
@@ -35,13 +36,17 @@ Application::Application(QObject *parent) : QObject(parent), oauth() {
 
     CreatePlaylistPage *createPlaylistPage = new CreatePlaylistPage;
 
+    MainWindow *mainWindow = new MainWindow;
+    mainWindow->resize(200, 200);
+
     SavedPlaylistPage *savedPlaylistPage = new SavedPlaylistPage;
 
     // Add pages to stacked widget
     this->stackedWidget = new QStackedWidget;
     this->stackedWidget->addWidget(loginPage);
     this->stackedWidget->addWidget(homePage);
-    this->stackedWidget->addWidget(createPlaylistPage);
+    //this->stackedWidget->addWidget(createPlaylistPage);
+    this->stackedWidget->addWidget(mainWindow);
     this->stackedWidget->addWidget(savedPlaylistPage);
 
     this->layout = new QVBoxLayout(window);
@@ -51,6 +56,8 @@ Application::Application(QObject *parent) : QObject(parent), oauth() {
     this->navBar->raise();  // Raise the navbar to the top of the screen
     this->navBar->hide();  // Dont show the navbar on login screen
     window->show();
+
+    this->stackedWidget->setCurrentIndex(2);
 }
 
 void Application::loginToMainPage() {
