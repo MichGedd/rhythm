@@ -22,7 +22,7 @@ signals:
 private:
     const QString AUTHORIZE_URL = "https://accounts.spotify.com/authorize";
     const QString TOKEN_URL = "https://accounts.spotify.com/api/token";
-    const QString SCOPES = "user-library-modify user-top-read";
+    const QString SCOPES = "user-library-modify user-top-read playlist-modify-public playlist-modify-private user-read-private user-read-email";
 
     // TODO: Find a better way to store secrets.
     const QString CLIENT_ID = "***REMOVED***";
@@ -48,7 +48,20 @@ public:
 //LINK: https://api.spotify.com/v1/recommendations
 //PURPOSE: Will return a list of recommended songs by the features given.  artists, genres, tracks are given above but there are more options
 //HEADERS: "Authorization:  " "Content-type: application/json"
-    void onGetRecommendations();
+    void onGetRecommendations(QString *name);
+    void runGetRecommendations();
+
+
+//TYPE: GET
+//NAME: onGetTopItem(int type)
+//LINK: https://api.spotify.com/v1/me/top/{type}
+//PURPOSE: Get the top track or atrist from user
+//HEADERS: "Authorization:  " "Content-type: application/json"
+    void onGetTopTrack();
+    void onGetTopArtist();
+    void createPlaylist();
+    void addToPlaylist(std::string playlistID, std::string trackURI);
+
 };
 
 

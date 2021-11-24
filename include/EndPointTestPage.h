@@ -19,9 +19,12 @@ class EndPointTestPage : public QWidget {
 public:
     EndPointTestPage(SpotifyOAuth *oauth, QWidget *parent = nullptr);
 
+    void runGetRecommendations();
 private:
     QLabel *label;
     QPushButton *loginButton;
+    QPushButton *loginButton1;
+    QPushButton *loginButton2;
     SpotifyOAuth *oauth;
 
 };

@@ -2,19 +2,34 @@
 // Created by krsin on 2021-11-02.
 //
 #include <Application.h>
+#include <iostream>
 #include "EndPointTestPage.h"
+
+
+
 
 EndPointTestPage::EndPointTestPage(SpotifyOAuth *oauth, QWidget *parent) : QWidget(parent) {
 
     this->oauth = oauth;
-    this->loginButton = new QPushButton("NEW PAGE", this);
 
-    int buttonWidth = 200;
+
+    this->loginButton = new QPushButton("1", this);
+    this->loginButton1 = new QPushButton("2", this);
+    this->loginButton2 = new QPushButton("3", this);
+
+    int buttonWidth = 100;
     int buttonHeight = 50;
     int buttonY = ((Application::APPLICATION_HEIGHT / 3) * 2) - (buttonHeight / 2);
-    int buttonX = (Application::APPLICATION_WIDTH / 2) - (buttonWidth / 2);
-    this->loginButton->setGeometry(QRect(QPoint(buttonX, buttonY), QSize(200, 50)));
-    connect(this->loginButton, &QPushButton::released, this->oauth, &SpotifyOAuth::onGetRecommendations);
+    int buttonX = (Application::APPLICATION_WIDTH / 4);
+    QString response;
+
+    this->loginButton->setGeometry(QRect(QPoint(buttonX - (buttonWidth / 2), buttonY), QSize(200, 50)));
+    this->loginButton1->setGeometry(QRect(QPoint(buttonX*2 - (buttonWidth / 2), buttonY), QSize(200, 50)));
+    this->loginButton2->setGeometry(QRect(QPoint(buttonX*3 - (buttonWidth / 2), buttonY), QSize(200, 50)));
+    connect(this->loginButton, &QPushButton::released, this->oauth, &SpotifyOAuth::createPlaylist);
+    connect(this->loginButton1, &QPushButton::released, this->oauth, &SpotifyOAuth::onGetUserInfo);
+
+    connect(this->loginButton2, &QPushButton::released, this->oauth, &SpotifyOAuth::runGetRecommendations);
 
     int labelWidth = 190;
     int labelHeight = 70;
@@ -25,3 +40,4 @@ EndPointTestPage::EndPointTestPage(SpotifyOAuth *oauth, QWidget *parent) : QWidg
     this->label->setObjectName("title");
 
 }
+

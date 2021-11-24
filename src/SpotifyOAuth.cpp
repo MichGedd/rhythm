@@ -21,11 +21,12 @@ SpotifyOAuth::SpotifyOAuth(QObject *parent) : QObject(parent) {
 
         if(status == QAbstractOAuth::Status::Granted) {
             std::cout << "Authorize Granted\n";
-            // Do something when authenticated
+            this->onGetTopArtist();
+            this->onGetTopTrack();
+            // Do somethin--g when authenticated
             emit authenticated();
         } else if(status == QAbstractOAuth::Status::NotAuthenticated) {
             std::cout << "Not Authorized\n";
-            // Do something when authenticated
             emit authenticated();
         } else if(status == QAbstractOAuth::Status::TemporaryCredentialsReceived) {
             std::cout << "Temporarily Authorized\n";
@@ -39,7 +40,7 @@ SpotifyOAuth::SpotifyOAuth(QObject *parent) : QObject(parent) {
             emit authenticated();
         }
         QString tempToken = getToken();
-        std::cout << tempToken.toStdString();
+        std::cout << tempToken.toStdString() << std::endl;
 //        std::cout << "Authorize not granted\n";
         // Should probably have some sort of error if we can't authenticate
     });
@@ -48,7 +49,10 @@ SpotifyOAuth::SpotifyOAuth(QObject *parent) : QObject(parent) {
 }
 
 void SpotifyOAuth::grant() {
+
     this->oauth2.grant();
+//    this->onGetTopTrack();
+//    this->onGetTopArtist();
 }
 
 QString SpotifyOAuth::getToken() {
@@ -61,6 +65,7 @@ void SpotifyOAuth::onGetUserInfo() {
     auto reply = oauth2.get(u);
     connect(reply, &QNetworkReply::finished, [=]() {
         if (reply->error() != QNetworkReply::NoError) {
+            std::cout << reply->errorString().toStdString() << std::endl;
             printf("ERROR IN NETWORK CONNECT");
             return;
         }
@@ -68,30 +73,20 @@ void SpotifyOAuth::onGetUserInfo() {
         const auto document = QJsonDocument::fromJson(data);
         const auto root = document.object();
         const auto userName = root.value("id").toString().toStdString();
-        std::cout << userName;
+        std::cout << userName << std::endl;
     });
 }
 
-void SpotifyOAuth::onGetRecommendations(){
+void SpotifyOAuth::onGetRecommendations(QString *name){
 
     QUrl u ("https://api.spotify.com/v1/recommendations");
     QVariantMap parameters;
-//    QString seed_artists[] = {"4NHQUGzhtTLFvgF5SZesLK"};
-//    QString seed_genres[] = {"classical","country"};
-//    QString seed_tracks[] = {"0c6xIDDpzE81m2q797ordA"};
+
     int limit = 1;
     QString genres = "classical,country";
     QString artists = "4NHQUGzhtTLFvgF5SZesLK";
     QString tracks = "0c6xIDDpzE81m2q797ordA";
-//    for (int i = 0; i < seed_genres->length(); i++){
-//        genres = genres + "," + seed_genres[i];
-//    }
-//    for (int i = 0; i < seed_artists->length(); i++){
-//        artists = artists + "," + seed_artists[i];
-//    }
-//    for (int i = 0; i < seed_tracks->length(); i++){
-//        tracks = tracks + "," + seed_tracks[i];
-//    }
+
 
 //HOW TO PASS PARAMETERS
     parameters.insert("seed_genres",genres);
@@ -99,26 +94,137 @@ void SpotifyOAuth::onGetRecommendations(){
     parameters.insert("seed_tracks",tracks);
     parameters.insert("limit",limit);
 
-//    ["seed_genres"] = genres;
-//    parameters["seed_artists"] = artists;
-//    parameters["seed_tracks"] = tracks;
-//    parameters["limit"] = limit;
-
-
     auto reply = oauth2.get(u, parameters);
     connect(reply, &QNetworkReply::finished, [=]() {
         if (reply->error() != QNetworkReply::NoError) {
+            std::cout << reply->errorString().toStdString() << std::endl;
             printf("ERROR IN NETWORK CONNECT");
+            *name = "Error";
             return;
         }
-
         const auto data = reply->readAll();
         const auto document = QJsonDocument::fromJson(data);
         const auto root = document.object();
-        const auto trackNames = root.value("tracks").toArray()[0].toObject().value("name").toString();
+        const auto trackNames = root.value("tracks").toArray()[0].toObject().value("uri").toString();
+        *name = trackNames;
+    std::cout << trackNames.toStdString() << std::endl;
+    });
+};
 
-        std::cout << trackNames.toStdString();
+
+void SpotifyOAuth::onGetTopTrack() {
+    QUrl u ("https://api.spotify.com/v1/me/top/tracks");
+    auto reply = oauth2.get(u);
+    QString Tracks;
+    connect(reply, &QNetworkReply::finished, [=]() {
+        if (reply->error() != QNetworkReply::NoError) {
+            std::cout << reply->error() << std::endl;
+            std::cout << reply->errorString().toStdString() << std::endl;
+            printf("ERROR IN NETWORK CONNECT");
+            return;
+        }
+        const auto data = reply->readAll();
+        const auto document = QJsonDocument::fromJson(data);
+        const auto root = document.object();
+        const int totalNum = root.value("total").toInt();
+        if (totalNum <= 0 ) {
+            std::cout << "You don't have any top songs or artists to based recommendation off of." << endl;
+            return;
+        }
+        //Return track URI
+        QString trackNames = root.value("items").toArray()[0].toObject().value("uri").toString();
+
+     std::cout << trackNames.toStdString() << std::endl;
+    });
+
+}
+
+void SpotifyOAuth::onGetTopArtist() {
+
+    QUrl v ("https://api.spotify.com/v1/me/top/artists");
+    auto replyartists = oauth2.get(v);
+    std::string response;
+    connect(replyartists, &QNetworkReply::finished, [=]() {
+    if (replyartists->error() != QNetworkReply::NoError) {
+    printf("ERROR IN NETWORK CONNECT");
+    return;
+    }
+
+    const auto data = replyartists->readAll();
+    const auto document = QJsonDocument::fromJson(data);
+    const auto root = document.object();
+    const int totalNum = root.value("total").toInt();
+    if (totalNum <= 0 ) {
+    std::cout << "You don't have any top songs or artists to based recommendation off of." << endl;
+//    *artist = 'Error';
+    return;
+    }
+    //Return artist URI
+    const auto trackNames = root.value("items").toArray()[0].toObject().value("uri").toString();
+
+    std::cout << trackNames.toStdString() << endl;
+//    *artist = trackNames;
+    return;
     });
 }
 
+void SpotifyOAuth::createPlaylist() {
+    QUrl v ("https://api.spotify.com/v1/users/gmx8drhtdos7sem71t32xt5ad/playlists");
+    QJsonObject parameters;
+    parameters["name"] = "NewPLaylistTitle";
+    parameters["description"] = "New playlist description";
+    parameters["public"] = 1;
+    QJsonDocument doc(parameters);
+    QByteArray data = doc.toJson();
 
+    auto replyartists = oauth2.post(v, data);
+    connect(replyartists, &QNetworkReply::finished, [=]() {
+        if (replyartists->error() != QNetworkReply::NoError) {
+            std::cout << replyartists->error() << std::endl;
+            std::cout << replyartists->errorString().toStdString() << std::endl;
+            printf("ERROR IN NETWORK CONNECT");
+            return;
+        }
+        const auto data = replyartists->readAll();
+        const auto document = QJsonDocument::fromJson(data);
+        const auto root = document.object();
+        const auto totalNum = root.value("name").toString();
+        std::cout << totalNum.toStdString() << std::endl;
+    });
+
+}
+
+void SpotifyOAuth::addToPlaylist(std::string playlistID, std::string trackURI) {
+    std::string url = "https://api.spotify.com/v1/playlists/";
+    url = url + playlistID + "/tracks?uris=" + trackURI;
+    QUrl v (QString::fromStdString(url));
+
+    QJsonObject parameters;
+    parameters["name"] = "NewPLaylistTitle";
+    parameters["description"] = "New playlist description";
+    parameters["public"] = 1;
+    QJsonDocument doc(parameters);
+    QByteArray data = doc.toJson();
+
+    auto replyartists = oauth2.post(v, data);
+    connect(replyartists, &QNetworkReply::finished, [=]() {
+        if (replyartists->error() != QNetworkReply::NoError) {
+            std::cout << replyartists->error() << std::endl;
+            std::cout << replyartists->errorString().toStdString() << std::endl;
+            printf("ERROR IN NETWORK CONNECT");
+            return;
+        }
+        const auto data = replyartists->readAll();
+        const auto document = QJsonDocument::fromJson(data);
+        std::cout << "No error!?" << std::endl;
+    });
+
+}
+
+void SpotifyOAuth::runGetRecommendations() {
+    QString response;
+    std::string tracks = "spotify:track:1Gcg62WCWynIyjilpHFYTJ";
+    std::string playlist = "1tFohRckqPRqBrgRfzaVn0";
+    this->addToPlaylist( playlist, tracks);
+    std::cout << "RECOMMENDATION" << std::endl << response.toStdString() << std::endl;
+}

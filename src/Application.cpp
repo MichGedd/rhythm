@@ -38,7 +38,6 @@ Application::Application(QObject *parent) : QObject(parent), oauth() {
     this->stackedWidget->addWidget(homePage);
     this->stackedWidget->addWidget(endPointTestPage);
 
-
     this->layout = new QVBoxLayout(window);
     this->layout->addWidget(this->stackedWidget);
     this->layout->setContentsMargins(0, 0, 0, 0);
@@ -48,6 +47,9 @@ Application::Application(QObject *parent) : QObject(parent), oauth() {
 
 void Application::loginToMainPage() {
     this->stackedWidget->setCurrentIndex(2);
+
+//    std::cout << "MAde it here" << std::endl;
+
 }
 void Application::moveToTestPage() {
     this->stackedWidget->setCurrentIndex(1);
