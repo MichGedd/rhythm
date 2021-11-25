@@ -6,7 +6,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_FLAGS -w)
-set(CMAKE_AUTOUIC_SEARCH_PATHS resources)
+set(CMAKE_AUTOUIC_SEARCH_PATHS ui)
 
 find_package(Qt5Network REQUIRED)
 find_package(Qt5NetworkAuth REQUIRED)
@@ -23,7 +23,7 @@ set(HEADER_FILES
 
 add_executable(rhythm ${HEADER_FILES} ${SOURCE_FILES})
 
-include_directories(rhythm include ${qcustomplot_SOURCE_DIR}/include)
+include_directories(rhythm include ui ${qcustomplot_SOURCE_DIR}/include)
 
 target_link_libraries(rhythm qcustomplot Qt5::Network Qt5::NetworkAuth)
 
