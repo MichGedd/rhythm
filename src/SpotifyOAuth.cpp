@@ -6,6 +6,9 @@
 #include <QtNetworkAuth>
 #include <iostream>
 
+using namespace std;
+
+
 SpotifyOAuth::SpotifyOAuth(QObject *parent) : QObject(parent) {
     QOAuthHttpServerReplyHandler *replyHandler = new QOAuthHttpServerReplyHandler(1234, this);
     this->oauth2.setReplyHandler(replyHandler);
@@ -14,7 +17,6 @@ SpotifyOAuth::SpotifyOAuth(QObject *parent) : QObject(parent) {
     this->oauth2.setScope(SpotifyOAuth::SCOPES);
     this->oauth2.setClientIdentifier(SpotifyOAuth::CLIENT_ID);
     this->oauth2.setClientIdentifierSharedKey(SpotifyOAuth::CLIENT_SECRET);
-
 
     connect(&(this->oauth2), &QOAuth2AuthorizationCodeFlow::statusChanged, [=](QAbstractOAuth::Status status) {
         std::cout << "Callback recieved\n";
@@ -77,10 +79,17 @@ void SpotifyOAuth::onGetUserInfo() {
     });
 }
 
-void SpotifyOAuth::onGetRecommendations( QString seedGenre, QString seedArtists, QString seedTracks){
+void SpotifyOAuth::onGetRecommendations(vector<string> *songURL, vector<string> seed_emotions,vector<float> seed_values,  QString seedGenre, QString seedArtists, QString seedTracks){
 
     QUrl u ("https://api.spotify.com/v1/recommendations");
     QVariantMap parameters;
+
+    QString input = "";
+
+    for(int i = 0; i < seed_emotions.size(); i++){
+        input = QString::fromStdString("target_" + seed_emotions[i]);
+        parameters.insert(input, seed_values[i]);
+    }
 
     int limit = 1;
     QString genres = seedGenre; //"classical,country";
@@ -106,7 +115,9 @@ void SpotifyOAuth::onGetRecommendations( QString seedGenre, QString seedArtists,
         const auto document = QJsonDocument::fromJson(data);
         const auto root = document.object();
         const auto trackNames = root.value("tracks").toArray()[0].toObject().value("uri").toString();
-//        *name = trackNames;
+
+        songURL.push_back(trackNames.toStdString());
+
     std::cout << trackNames.toStdString() << std::endl;
     });
 };

@@ -9,7 +9,7 @@
 #include <QMainWindow>
 #include <SpotifyOAuth.h>
 #include <NavBar.h>
-
+#include "playlistAlgorithm.h"
 
 class Application : public QObject {
     Q_OBJECT
@@ -34,5 +34,7 @@ private:
     QStackedWidget *stackedWidget;
     QVBoxLayout *layout;
     SpotifyOAuth oauth;
+    PlaylistGenerator playGen;
     NavBar *navBar;
+
 };

@@ -3,7 +3,22 @@
 using namespace std;
 
 //implementation of constructor method
-PlaylistGenerator::PlaylistGenerator(vector<graph> inputGraphs, int playlistLength){
+PlaylistGenerator::PlaylistGenerator(SpotifyOAuth *oauth, QObject *parent) : QObject(parent) {
+    this->oauth = oauth;
+    //convert playlistLength to ms from minutes
+    playlistDuration_ms = 0;
+    currentDuration_ms = 0;
+}
+PlaylistGenerator::PlaylistGenerator(QObject *parent) : QObject(parent) {
+    oauth = nullptr;
+    //convert playlistLength to ms from minutes
+    playlistDuration_ms = 0;
+    currentDuration_ms = 0;
+}
+
+
+
+void PlaylistGenerator::getGraphs(vector<graph> inputGraphs, int playlistLength){
     graphs = inputGraphs;
     //convert playlistLength to ms from minutes
     playlistDuration_ms = playlistLength * MS_IN_MINUTE;
@@ -23,7 +38,7 @@ void PlaylistGenerator::generatePlaylists(){
             slope = (float)(g.points[i].value - g.points[i-1].value)/(float)(g.points[i].time_minutes - g.points[i-1].time_minutes);
             //target name is same as name on graph
             target.variableName = g.variableName;
-            //calculate target value as y = mx + b     
+            //calculate target value as y = mx + b
             //convert currentDuration into minutes for calculation
             target.value = slope * (currentDuration_ms/MS_IN_MINUTE - g.points[i-1].time_minutes) + g.points[i-1].value;
             //add the target to the list of targets to use for recommendations
@@ -38,14 +53,17 @@ void PlaylistGenerator::generatePlaylists(){
         //API code goes here
 
         //ensure that the target.value is within the limits for the specific variable!!!!!
-        
+
+        QString genres = "classical,country";
+        QString tracks = "4NHQUGzhtTLFvgF5SZesLK";
+        QString artists = "4NHQUGzhtTLFvgF5SZesLK";
+//        cout << "Reach here" << endl;
+        this->oauth->onGetRecommendations(&songURIs, targetSongs, artists, tracks);
         /*
-        try{
-           songURIs.push_back(onGetRecommendation(targetSongs)) 
-        }catch(some error saying song can't be found){
-            cout << e.what();
-        }
-        
+        top track
+        top artist
+           songURIs.push_back(onGetRecommendation(targetSongs))
+
         currentDuration_ms += onGetTrackDuration();
 
         targetSongs.clear();
@@ -65,16 +83,16 @@ void PlaylistGenerator::generatePlaylists(){
 
         //add the songID of the recommended song onto the list of songIDs
         //replace '5' with correct ID for the song
-        songURIs.push_back("abc123");
-
-        //add the song duration to the current playlist duration
-        //hard coded value of 180 000 ms = 3 minutes
-        currentDuration_ms += 3 * MS_IN_MINUTE;
-
-        //clear target values for next set on inputs from graph
-        targetSongs.clear();
-    }
-    cout << "Generated playlist duration: " << currentDuration_ms/MS_IN_MINUTE << '\n';
+//        songURIs.push_back("abc123");
+//
+//        //add the song duration to the current playlist duration
+//        //hard coded value of 180 000 ms = 3 minutes
+//        currentDuration_ms += 3 * MS_IN_MINUTE;
+//
+//        //clear target values for next set on inputs from graph
+//        targetSongs.clear();
+//    }
+//    cout << "Generated playlist duration: " << currentDuration_ms/MS_IN_MINUTE << '\n';
 }
 
 void PlaylistGenerator::addPlaylistToAccount(){

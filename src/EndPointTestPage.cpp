@@ -8,9 +8,10 @@
 
 
 
-EndPointTestPage::EndPointTestPage(SpotifyOAuth *oauth, QWidget *parent) : QWidget(parent) {
+EndPointTestPage::EndPointTestPage(SpotifyOAuth *oauth, PlaylistGenerator *playgen, QWidget *parent) : QWidget(parent) {
 
     this->oauth = oauth;
+    this->playgen = playgen;
 
 
     this->loginButton = new QPushButton("create", this);
@@ -28,7 +29,7 @@ EndPointTestPage::EndPointTestPage(SpotifyOAuth *oauth, QWidget *parent) : QWidg
     this->loginButton2->setGeometry(QRect(QPoint(buttonX*3 - (buttonWidth / 2), buttonY), QSize(200, 50)));
     connect(this->loginButton, &QPushButton::released, this->oauth, &SpotifyOAuth::createPlaylist);
     connect(this->loginButton1, &QPushButton::released, this->oauth, &SpotifyOAuth::runGetRecommendations);
-    connect(this->loginButton2, &QPushButton::released, this->oauth, &SpotifyOAuth::runAddtoPlaylist);
+    connect(this->loginButton2, &QPushButton::released, this->playgen, &PlaylistGenerator::generatePlaylists);
 
     int labelWidth = 190;
     int labelHeight = 70;

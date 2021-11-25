@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <SpotifyOAuth.h>
 
 //number of milliseconds in a minute
 #define MS_IN_MINUTE 60000
@@ -20,14 +21,20 @@ typedef struct graph{
     bool activeGraph;
 }graph;
 
-class PlaylistGenerator{
+class PlaylistGenerator : public QObject {
+    Q_OBJECT
+
+
 public:
-    PlaylistGenerator(vector<graph> inputGraphs, int playlistLength);
+    PlaylistGenerator(QObject *parent = nullptr);
+    PlaylistGenerator(SpotifyOAuth *oauth, QObject *parent = nullptr);
+    void getGraphs(vector<graph> inputGraphs, int playlistLength);
     void generatePlaylists();
     void addPlaylistToAccount();
     vector<string> getSongURIs();
 private:
     //list of graphs (contains variable name and all data points)
+    SpotifyOAuth *oauth;
     vector<graph> graphs;
     //total duration of the playlist
     int playlistDuration_ms;
