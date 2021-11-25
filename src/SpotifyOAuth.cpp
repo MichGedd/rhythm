@@ -77,15 +77,15 @@ void SpotifyOAuth::onGetUserInfo() {
     });
 }
 
-void SpotifyOAuth::onGetRecommendations(QString *name){
+void SpotifyOAuth::onGetRecommendations( QString seedGenre, QString seedArtists, QString seedTracks){
 
     QUrl u ("https://api.spotify.com/v1/recommendations");
     QVariantMap parameters;
 
     int limit = 1;
-    QString genres = "classical,country";
-    QString artists = "4NHQUGzhtTLFvgF5SZesLK";
-    QString tracks = "0c6xIDDpzE81m2q797ordA";
+    QString genres = seedGenre; //"classical,country";
+    QString artists = seedArtists;//"4NHQUGzhtTLFvgF5SZesLK";
+    QString tracks = seedTracks; //"0c6xIDDpzE81m2q797ordA";
 
 
 //HOW TO PASS PARAMETERS
@@ -99,14 +99,14 @@ void SpotifyOAuth::onGetRecommendations(QString *name){
         if (reply->error() != QNetworkReply::NoError) {
             std::cout << reply->errorString().toStdString() << std::endl;
             printf("ERROR IN NETWORK CONNECT");
-            *name = "Error";
+//            *name = "Error";
             return;
         }
         const auto data = reply->readAll();
         const auto document = QJsonDocument::fromJson(data);
         const auto root = document.object();
         const auto trackNames = root.value("tracks").toArray()[0].toObject().value("uri").toString();
-        *name = trackNames;
+//        *name = trackNames;
     std::cout << trackNames.toStdString() << std::endl;
     });
 };
@@ -214,17 +214,25 @@ void SpotifyOAuth::addToPlaylist(std::string playlistID, std::string trackURI) {
             printf("ERROR IN NETWORK CONNECT");
             return;
         }
+
         const auto data = replyartists->readAll();
         const auto document = QJsonDocument::fromJson(data);
-        std::cout << "No error!?" << std::endl;
+
+        std::cout << "Added item to playlist" << std::endl;
     });
 
 }
-
 void SpotifyOAuth::runGetRecommendations() {
+    QString genres = "classical,country";
+    QString tracks = "4NHQUGzhtTLFvgF5SZesLK";
+    QString artists = "4NHQUGzhtTLFvgF5SZesLK";
+    this->onGetRecommendations( genres, artists, tracks);
+    std::cout << "RECOMMENDATION" << std::endl;
+}
+void SpotifyOAuth::runAddtoPlaylist() {
     QString response;
     std::string tracks = "spotify:track:1Gcg62WCWynIyjilpHFYTJ";
     std::string playlist = "1tFohRckqPRqBrgRfzaVn0";
     this->addToPlaylist( playlist, tracks);
-    std::cout << "RECOMMENDATION" << std::endl << response.toStdString() << std::endl;
+    std::cout << "ADDED" << std::endl;
 }

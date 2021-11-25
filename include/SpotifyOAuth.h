@@ -48,7 +48,7 @@ public:
 //LINK: https://api.spotify.com/v1/recommendations
 //PURPOSE: Will return a list of recommended songs by the features given.  artists, genres, tracks are given above but there are more options
 //HEADERS: "Authorization:  " "Content-type: application/json"
-    void onGetRecommendations(QString *name);
+    void onGetRecommendations(QString seedGenre, QString seedArtists, QString seedTracks);
     void runGetRecommendations();
 
 
@@ -61,6 +61,7 @@ public:
     void onGetTopArtist();
     void createPlaylist();
     void addToPlaylist(std::string playlistID, std::string trackURI);
+    void runAddtoPlaylist();
 
 };
 
