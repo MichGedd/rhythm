@@ -235,4 +235,4 @@ void SpotifyOAuth::runAddtoPlaylist() {
     std::string playlist = "1tFohRckqPRqBrgRfzaVn0";
     this->addToPlaylist( playlist, tracks);
     std::cout << "ADDED" << std::endl;
-}
+    }

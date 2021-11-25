@@ -2,6 +2,10 @@ QObject {
     background-color: rgb(56, 53, 53);
 }
 
+QObject#navBar {
+    border-bottom: 5px solid rgb(41, 85, 239);
+}
+
 QPushButton {
     background-color: rgb(41, 85, 239);
     color: white;
@@ -14,8 +18,34 @@ QPushButton:hover {
     background-color: rgb(31, 75, 229);
 }
 
+QPushButton#logo {
+    background-color: rgba(0, 0, 0, 0);
+}
+
 QLabel#title {
     color: rgb(41, 85, 239);
     font-family: "Comic Sans MS";
     font-size: 50px;
+}
+
+QLineEdit {
+    color: white;
+    border: 3px solid rgb(31, 75, 229);
+}
+
+QComboBox {
+    color: white;
+    background-color: rgb(31, 75, 229);
+}
+
+QListView {
+    color: white;
+}
+
+QLabel#timeNote {
+    color: white;
+}
+
+QRadioButton {
+    color: white;
 }

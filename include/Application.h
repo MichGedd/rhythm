@@ -8,6 +8,7 @@
 #include <QWidget>
 #include <QMainWindow>
 #include <SpotifyOAuth.h>
+#include <NavBar.h>
 
 
 class Application : public QObject {
@@ -21,7 +22,11 @@ public:
 
 private slots:
     void loginToMainPage();
-    void moveToTestPage();
+    void logout();
+    void switchToCreatePlaylist();
+    void switchToSavedPlaylists();
+    void switchToHomePage();
+    void switchToAPITESTPage();
 
 
 private:
@@ -29,4 +34,5 @@ private:
     QStackedWidget *stackedWidget;
     QVBoxLayout *layout;
     SpotifyOAuth oauth;
+    NavBar *navBar;
 };
