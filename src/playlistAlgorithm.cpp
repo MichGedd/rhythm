@@ -25,44 +25,41 @@ void PlaylistGenerator::getGraphs(vector<graph> inputGraphs, int playlistLength)
     currentDuration_ms = 0;
 }
 
-void PlaylistGenerator::generatePlaylists(){
-    vector<targetSong> targetSongs;
+void PlaylistGenerator::generatePlaylists() {
     int i;
     float slope;
-    while(currentDuration_ms < playlistDuration_ms){
-        for(graph g : graphs){
+    while (currentDuration_ms < playlistDuration_ms) {
+        variableNames.clear();
+        values.clear();
+        for (graph g: graphs) {
             i = 1;
             //move through graph until the current duration is just past point 'i'
-            while((g.points[i].time_minutes * MS_IN_MINUTE) < currentDuration_ms) i++;
+            while ((g.points[i].time_minutes * MS_IN_MINUTE) < currentDuration_ms) i++;
             //get slope of line between point i and i-1
-            slope = (float)(g.points[i].value - g.points[i-1].value)/(float)(g.points[i].time_minutes - g.points[i-1].time_minutes);
+            slope = (float) (g.points[i].value - g.points[i - 1].value) /
+                    (float) (g.points[i].time_minutes - g.points[i - 1].time_minutes);
             //target name is same as name on graph
-            target.variableName = g.variableName;
+            variableNames.push_back(g.variableName);
             //calculate target value as y = mx + b
             //convert currentDuration into minutes for calculation
-            target.value = slope * (currentDuration_ms/MS_IN_MINUTE - g.points[i-1].time_minutes) + g.points[i-1].value;
-            //add the target to the list of targets to use for recommendations
-            targetSongs.push_back(target);
+            values.push_back(
+                    slope * (currentDuration_ms / MS_IN_MINUTE - g.points[i - 1].time_minutes) + g.points[i - 1].value);
         }
         //use target values structure to search for a song through Spotify API with all the requirements
-        cout << "\nTime = " << currentDuration_ms/MS_IN_MINUTE << " minutes -> Search for:\n";
+        //cout << "\nTime = " << currentDuration_ms/MS_IN_MINUTE << " minutes -> Search for:\n";
 
-        for(targetSong t : targetSongs){
-            cout << t.variableName << " at value " << t.value << '\n';
-        }
         //API code goes here
-
-        //ensure that the target.value is within the limits for the specific variable!!!!!
 
         QString genres = "classical,country";
         QString tracks = "4NHQUGzhtTLFvgF5SZesLK";
         QString artists = "4NHQUGzhtTLFvgF5SZesLK";
-//        cout << "Reach here" << endl;
-        this->oauth->onGetRecommendations(&songURIs, targetSongs, artists, tracks);
+
+        this->oauth->onGetRecommendations(&songURIs, variableNames, values, genres, artists, tracks);
+        cout << "SONG URL: " << songURIs[0];
+
         /*
         top track
-        top artist
-           songURIs.push_back(onGetRecommendation(targetSongs))
+        top artists
 
         currentDuration_ms += onGetTrackDuration();
 
@@ -91,8 +88,8 @@ void PlaylistGenerator::generatePlaylists(){
 //
 //        //clear target values for next set on inputs from graph
 //        targetSongs.clear();
-//    }
-//    cout << "Generated playlist duration: " << currentDuration_ms/MS_IN_MINUTE << '\n';
+    }
+    //cout << "Generated playlist duration: " << currentDuration_ms/MS_IN_MINUTE << '\n';
 }
 
 void PlaylistGenerator::addPlaylistToAccount(){
@@ -119,10 +116,6 @@ void PlaylistGenerator::addPlaylistToAccount(){
         //onAddTrackToPlaylist(playlistID, songURIs);
     }
 
-}
-
-vector<string> PlaylistGenerator::getSongURIs(){
-    return songURIs;
 }
 
 void PlaylistGenerator::clamp(float min, float max, float &number) {

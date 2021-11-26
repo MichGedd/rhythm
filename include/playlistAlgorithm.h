@@ -31,7 +31,6 @@ public:
     void getGraphs(vector<graph> inputGraphs, int playlistLength);
     void generatePlaylists();
     void addPlaylistToAccount();
-    vector<string> getSongURIs();
 private:
     //list of graphs (contains variable name and all data points)
     SpotifyOAuth *oauth;
@@ -43,11 +42,8 @@ private:
     //output of songIDs used to access the songs
     vector<string> songURIs;
     //structure to hold the target values to get recommendations from
-    typedef struct targetSong{
-        string variableName;
-        float value;
-    }targetSong;
-    targetSong target;
+    vector<string> variableNames;
+    vector<float> values;
 
     void clamp(float min, float max, float &number);
 
