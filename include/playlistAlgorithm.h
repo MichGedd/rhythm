@@ -48,6 +48,7 @@ private:
         float value;
     }targetSong;
     targetSong target;
+    string currSong;
 
     void clamp(float min, float max, float &number);
 

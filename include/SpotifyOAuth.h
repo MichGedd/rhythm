@@ -30,6 +30,7 @@ private:
     const QString CLIENT_SECRET = "***REMOVED***";
 
     QOAuth2AuthorizationCodeFlow oauth2;
+    string songToBeAdded;
 
 public:
     SpotifyOAuth(QObject *parent = nullptr);
@@ -49,7 +50,7 @@ public:
 //LINK: https://api.spotify.com/v1/recommendations
 //PURPOSE: Will return a list of recommended songs by the features given.  artists, genres, tracks are given above but there are more options
 //HEADERS: "Authorization:  " "Content-type: application/json"
-    string onGetRecommendations(vector<string> &songURL,vector<string> seed_emotions,vector<float> seed_values, QString seedGenre, QString seedArtists, QString seedTracks);
+    void onGetRecommendations(vector<string> seed_emotions,vector<float> seed_values, QString seedGenre, QString seedArtists, QString seedTracks);
     void runGetRecommendations();
 
 
@@ -58,6 +59,7 @@ public:
 //LINK: https://api.spotify.com/v1/me/top/{type}
 //PURPOSE: Get the top track or atrist from user
 //HEADERS: "Authorization:  " "Content-type: application/json"
+    string getSongToBeAdded();
     void onGetTopTrack();
     void onGetTopArtist();
     void createPlaylist();
