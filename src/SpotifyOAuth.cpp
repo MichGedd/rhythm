@@ -5,6 +5,7 @@
 #include <QtGui>
 #include <QtNetworkAuth>
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -83,10 +84,11 @@ void SpotifyOAuth::onGetUserInfo() {
 
 void SpotifyOAuth::onGetRecommendations(vector<string> seed_emotions,vector<float> seed_values,  QString seedGenre, QString seedArtists, QString seedTracks){
 
+
     QUrl u ("https://api.spotify.com/v1/recommendations");
     QVariantMap parameters;
 
-    QString input = "";
+    QString input;
 
     for(int i = 0; i < seed_emotions.size(); i++){
         input = QString::fromStdString("target_" + seed_emotions[i]);
@@ -105,6 +107,8 @@ void SpotifyOAuth::onGetRecommendations(vector<string> seed_emotions,vector<floa
     parameters.insert("seed_tracks",tracks);
     parameters.insert("limit",limit);
     string response;
+
+
     auto reply = oauth2.get(u, parameters);
     connect(reply, &QNetworkReply::finished, [=]() {
         if (reply->error() != QNetworkReply::NoError) {
@@ -237,14 +241,28 @@ void SpotifyOAuth::addToPlaylist(std::string playlistID, std::string trackURI) {
     });
 
 }
+
 void SpotifyOAuth::runGetRecommendations() {
     QString genres = "classical,country";
     QString tracks = "4NHQUGzhtTLFvgF5SZesLK";
     QString artists = "4NHQUGzhtTLFvgF5SZesLK";
 
-    this->onGetRecommendations( genres, artists, tracks);
+    //need to add this so it will run
+
+    vector<string> variableNames;
+    variableNames.push_back("energy");
+    vector<float> values;
+    values.push_back(0.6);
+    vector<string> songURL;
+
+//    this->onGetRecommendations(&songURL, variableNames, values, genres, artists, tracks);
     std::cout << "RECOMMENDATION" << std::endl;
+
+    if(songURL.empty()){
+        cout << "no recommendation received\n";
+    }
 }
+
 void SpotifyOAuth::runAddtoPlaylist() {
     QString response;
     std::string tracks = "spotify:track:1Gcg62WCWynIyjilpHFYTJ";

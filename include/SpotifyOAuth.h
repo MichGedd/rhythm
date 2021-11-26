@@ -7,6 +7,7 @@
 #include <QtCore>
 #include <QtNetwork>
 #include <QOAuth2AuthorizationCodeFlow>
+#include <string>
 using namespace std;
 
 class SpotifyOAuth : public QObject {
@@ -56,6 +57,7 @@ public:
 //PURPOSE: Will return a list of recommended songs by the features given.  artists, genres, tracks are given above but there are more options
 //HEADERS: "Authorization:  " "Content-type: application/json"
     void onGetRecommendations(vector<string> seed_emotions,vector<float> seed_values, QString seedGenre, QString seedArtists, QString seedTracks);
+
     void runGetRecommendations();
 
 
@@ -71,6 +73,8 @@ public:
     void addToPlaylist(std::string playlistID, std::string trackURI);
     void runAddtoPlaylist();
 
+    string onGetRecommendations(vector<string> songURL, vector<string> seed_emotions, vector<float> seed_values,
+                                QString seedGenre, QString seedArtists, QString seedTracks);
 };
 
 

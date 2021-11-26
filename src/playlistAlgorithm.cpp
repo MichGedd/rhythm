@@ -77,10 +77,10 @@ void PlaylistGenerator::generatePlaylists(){
 
     cout << "HEREE" << endl << this->oauth->getSongToBeAdded() <<endl;
 
+
         /*
         top track
-        top artist
-           songURIs.push_back(onGetRecommendation(targetSongs))
+        top artists
 
         currentDuration_ms += onGetTrackDuration();
 
@@ -109,9 +109,8 @@ void PlaylistGenerator::generatePlaylists(){
 //
 //        //clear target values for next set on inputs from graph
 //        targetSongs.clear();
-//    }
-//    cout << "Generated playlist duration: " << currentDuration_ms/MS_IN_MINUTE << '\n';
-//}
+
+    //cout << "Generated playlist duration: " << currentDuration_ms/MS_IN_MINUTE << '\n';
 }
 
 void PlaylistGenerator::addPlaylistToAccount() {
@@ -138,10 +137,6 @@ void PlaylistGenerator::addPlaylistToAccount() {
         //onAddTrackToPlaylist(playlistID, songURIs);
     }
 
-}
-
-vector<string> PlaylistGenerator::getSongURIs(){
-    return songURIs;
 }
 
 void PlaylistGenerator::clamp(float min, float max, float &number) {

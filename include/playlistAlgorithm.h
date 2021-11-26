@@ -31,7 +31,6 @@ public:
     void getGraphs(vector<graph> inputGraphs, int playlistLength);
     void generatePlaylists();
     void addPlaylistToAccount();
-    vector<string> getSongURIs();
 private:
     //list of graphs (contains variable name and all data points)
     SpotifyOAuth *oauth;
@@ -49,6 +48,7 @@ private:
     }targetSong;
     targetSong target;
     string currSong;
+
 
     void clamp(float min, float max, float &number);
 
