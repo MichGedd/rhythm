@@ -69,8 +69,9 @@ void PlaylistGenerator::generatePlaylists(){
         QString artists = "4NHQUGzhtTLFvgF5SZesLK";
 //        cout << "Reach here" << endl;
         this->oauth->onGetRecommendations(variablename, variablevalue, genres, artists, tracks);
-        if (this->oauth->getSongToBeAdded() != ""){
-            songURIs.push_back(this->oauth->getSongToBeAdded());
+
+        if (this->oauth->songToBeAdded != ""){
+            songURIs.push_back(this->oauth->songToBeAdded);
             cout << "HEREE22222" << endl;
         }
 

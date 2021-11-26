@@ -30,9 +30,14 @@ private:
     const QString CLIENT_SECRET = "***REMOVED***";
 
     QOAuth2AuthorizationCodeFlow oauth2;
-    string songToBeAdded;
 
 public:
+    string songToBeAdded;
+//    string playlistID;
+//    string topTrack;
+//    string topArtist;
+
+
     SpotifyOAuth(QObject *parent = nullptr);
 
     QString getToken();

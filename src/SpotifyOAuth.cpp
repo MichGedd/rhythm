@@ -25,6 +25,8 @@ SpotifyOAuth::SpotifyOAuth(QObject *parent) : QObject(parent) {
             std::cout << "Authorize Granted\n";
             this->onGetTopArtist();
             this->onGetTopTrack();
+            this->runGetRecommendations();
+
             // Do somethin--g when authenticated
             emit authenticated();
         } else if(status == QAbstractOAuth::Status::NotAuthenticated) {
@@ -239,7 +241,8 @@ void SpotifyOAuth::runGetRecommendations() {
     QString genres = "classical,country";
     QString tracks = "4NHQUGzhtTLFvgF5SZesLK";
     QString artists = "4NHQUGzhtTLFvgF5SZesLK";
-//    this->onGetRecommendations( genres, artists, tracks);
+
+    this->onGetRecommendations( genres, artists, tracks);
     std::cout << "RECOMMENDATION" << std::endl;
 }
 void SpotifyOAuth::runAddtoPlaylist() {
