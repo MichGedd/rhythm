@@ -36,7 +36,7 @@ Application::Application(QObject *parent) : QObject(parent), oauth(), playGen(&o
 
     HomePage *homePage = new HomePage;
 
-    CreatePlaylistPage *createPlaylistPage = new CreatePlaylistPage;
+    CreatePlaylistPage *createPlaylistPage = new CreatePlaylistPage(&playGen);
 
     SavedPlaylistPage *savedPlaylistPage = new SavedPlaylistPage;
 

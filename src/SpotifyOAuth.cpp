@@ -82,7 +82,7 @@ void SpotifyOAuth::onGetUserInfo() {
     });
 }
 
-void SpotifyOAuth::onGetRecommendations(vector<string> seed_emotions,vector<float> seed_values,  QString seedGenre, QString seedArtists, QString seedTracks){
+void SpotifyOAuth::onGetRecommendations(vector<string> *songURL, vector<string> seed_emotions,vector<float> seed_values,  QString seedGenre, QString seedArtists, QString seedTracks){
 
 
     QUrl u ("https://api.spotify.com/v1/recommendations");
@@ -109,23 +109,26 @@ void SpotifyOAuth::onGetRecommendations(vector<string> seed_emotions,vector<floa
     string response;
 
 
-    auto reply = oauth2.get(u, parameters);
+    //auto reply = oauth2.get(u, parameters);
+    QNetworkReply *reply;
+    reply = oauth2.get(u, parameters);
+
     connect(reply, &QNetworkReply::finished, [=]() {
+
         if (reply->error() != QNetworkReply::NoError) {
             std::cout << reply->errorString().toStdString() << std::endl;
             printf("ERROR IN NETWORK CONNECT");
-//            *name = "Error";
-            this->songToBeAdded = "";
-
             return;
         }
         const auto data = reply->readAll();
         const auto document = QJsonDocument::fromJson(data);
         const auto root = document.object();
         const QString trackNames = root.value("tracks").toArray()[0].toObject().value("uri").toString();
-        this->songToBeAdded = trackNames.toStdString();
-        return;
+        cout << trackNames.toStdString() << endl;
+        songURL->push_back(trackNames.toStdString());
+        emit recommendationSignal();
     });
+
 //    std::cout << reply << std::endl;
 
 };

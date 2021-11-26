@@ -6,13 +6,15 @@ int playlistLength =36;
 vector<graph> InputGraphs;
 vector<graph> FinalGraphs;
 
-CreatePlaylistPage::CreatePlaylistPage(QWidget *parent)
+CreatePlaylistPage::CreatePlaylistPage(PlaylistGenerator *playgen, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::CreatePlaylistPage)
 {
     ui->setupUi(this);
     qDebug() << 5;
     CreatePlaylistPage::plot();
+
+    this->playgen = playgen;
 
 }
 
@@ -26,27 +28,7 @@ CreatePlaylistPage::~CreatePlaylistPage()
 
 
 
-/*void QCustomPlot::myFunc(int j)
-{
-    qDebug() << "CHANGEGGGG";
-    QCPGraph *graph = ui->plot->graph(1);
-    graph->setSelectable(QCP::stDataRange);
-    QCustomPlot *customPlot = ui->plot;
-    foreach (QCPDataRange dataRange, QCPDataSelection(graph->selection()).dataRanges())
-    {
-      QCPGraphDataContainer::const_iterator begin = graph->data()->at(dataRange.begin()); // get range begin iterator from index
-      QCPGraphDataContainer::const_iterator end = graph->data()->at(dataRange.end()); // get range end iterator from index
-      for (QCPGraphDataContainer::const_iterator it=begin; it!=end; ++it)
-      {
-        // iterator "it" will go through all selected data points, as an example, we calculate the value average
-        //sum += it->value;
-        int tempKey= it->mainKey();
-        graph->data()->remove(it->mainKey());
-        graph->addData(tempKey+0.3,10);
 
-      }
-    }
-}*/
 
 
 
@@ -476,6 +458,12 @@ bool alreadyInFinalGraph = false;
      qDebug() << "PRINTING";
      qDebug() <<QString::fromStdString(FinalGraphs[i].variableName);
  }
+
+ playgen->getGraphs(FinalGraphs, playlistLength);
+ playgen->generatePlaylists();
+
+ //ADD THIS
+ //playgen->addPlaylistToAccount();
 
 }
 

@@ -24,6 +24,13 @@ typedef struct graph{
 class PlaylistGenerator : public QObject {
     Q_OBJECT
 
+public slots:
+    void recommendationCallback();
+    void calculate();
+
+signals:
+    void calculateSignal();
+
 
 public:
     PlaylistGenerator(QObject *parent = nullptr);
@@ -42,12 +49,10 @@ private:
     //output of songIDs used to access the songs
     vector<string> songURIs;
     //structure to hold the target values to get recommendations from
-    typedef struct targetSong{
-        string variableName;
-        float value;
-    }targetSong;
-    targetSong target;
+    vector<string> variableNames;
+    vector<float> values;
     string currSong;
+
 
 
     void clamp(float min, float max, float &number);
