@@ -9,7 +9,7 @@
 #include <QMainWindow>
 #include <SpotifyOAuth.h>
 #include <NavBar.h>
-
+#include <PlaylistAlgorithm.h>
 
 class Application : public QObject {
     Q_OBJECT
@@ -27,10 +27,13 @@ private slots:
     void switchToSavedPlaylists();
     void switchToHomePage();
 
+
 private:
     QWidget *window;
     QStackedWidget *stackedWidget;
     QVBoxLayout *layout;
     SpotifyOAuth oauth;
+    PlaylistGenerator playGen;
     NavBar *navBar;
+
 };

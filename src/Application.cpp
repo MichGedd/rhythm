@@ -1,3 +1,4 @@
+
 //
 // Created by micha on 2021-10-19.
 //
@@ -5,11 +6,10 @@
 #include <Application.h>
 #include <LoginPage.h>
 #include <HomePage.h>
-#include <CreatePlaylistPage.h>
 #include <SavedPlaylistPage.h>
+#include <CreatePlaylistPage.h>
 
-Application::Application(QObject *parent) : QObject(parent), oauth() {
-
+Application::Application(QObject *parent) : QObject(parent), oauth(), playGen(&oauth) {
     // Initialize container
     this->window = new QWidget;
     this->window->resize(Application::APPLICATION_WIDTH, Application::APPLICATION_HEIGHT);
@@ -29,11 +29,12 @@ Application::Application(QObject *parent) : QObject(parent), oauth() {
 
     // Initialize pages
     LoginPage *loginPage = new LoginPage(&oauth);
+
     connect(&(this->oauth), &SpotifyOAuth::authenticated, this, &Application::loginToMainPage);
 
     HomePage *homePage = new HomePage;
 
-    CreatePlaylistPage *createPlaylistPage = new CreatePlaylistPage;
+    CreatePlaylistPage *createPlaylistPage = new CreatePlaylistPage(&playGen);
 
     SavedPlaylistPage *savedPlaylistPage = new SavedPlaylistPage;
 

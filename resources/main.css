@@ -27,3 +27,25 @@ QLabel#title {
     font-family: "Comic Sans MS";
     font-size: 50px;
 }
+
+QLineEdit {
+    color: white;
+    border: 3px solid rgb(31, 75, 229);
+}
+
+QComboBox {
+    color: white;
+    background-color: rgb(31, 75, 229);
+}
+
+QListView {
+    color: white;
+}
+
+QLabel#timeNote {
+    color: white;
+}
+
+QRadioButton {
+    color: white;
+}
