@@ -27,8 +27,8 @@ EndPointTestPage::EndPointTestPage(SpotifyOAuth *oauth, PlaylistGenerator *playg
     this->loginButton->setGeometry(QRect(QPoint(buttonX - (buttonWidth / 2), buttonY), QSize(200, 50)));
     this->loginButton1->setGeometry(QRect(QPoint(buttonX*2 - (buttonWidth / 2), buttonY), QSize(200, 50)));
     this->loginButton2->setGeometry(QRect(QPoint(buttonX*3 - (buttonWidth / 2), buttonY), QSize(200, 50)));
-    connect(this->loginButton, &QPushButton::released, this->oauth, &SpotifyOAuth::createPlaylist);
-    connect(this->loginButton1, &QPushButton::released, this->oauth, &SpotifyOAuth::runGetRecommendations);
+//    connect(this->loginButton, &QPushButton::released, this->oauth, &SpotifyOAuth::createPlaylist);
+//    connect(this->loginButton1, &QPushButton::released, this->oauth, &SpotifyOAuth::runGetRecommendations);
     connect(this->loginButton2, &QPushButton::released, this->playgen, &PlaylistGenerator::generatePlaylists);
 
     int labelWidth = 190;

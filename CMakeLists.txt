@@ -10,6 +10,8 @@ set(CMAKE_AUTOUIC_SEARCH_PATHS ui)
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5Network REQUIRED)
 find_package(Qt5NetworkAuth REQUIRED)
+find_package(Qt5 COMPONENTS Concurrent REQUIRED)
+
 
 add_subdirectory(external/qcustomplot)
 
@@ -25,7 +27,7 @@ set(HEADER_FILES
 add_executable(rhythm ${HEADER_FILES} ${SOURCE_FILES})
 include_directories(rhythm include ui ${qcustomplot_SOURCE_DIR}/include)
 
-target_link_libraries(rhythm qcustomplot Qt5::Widgets Qt5::Network  Qt5::NetworkAuth )
+target_link_libraries(rhythm qcustomplot Qt5::Widgets Qt5::Network  Qt5::NetworkAuth Qt5::Concurrent)
 
 add_custom_target(copy_resources COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/resources ${CMAKE_CURRENT_BINARY_DIR}/resources)
 add_dependencies(rhythm copy_resources)

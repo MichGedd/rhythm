@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <SpotifyOAuth.h>
+#include <future>
 
 //number of milliseconds in a minute
 #define MS_IN_MINUTE 60000
@@ -26,10 +27,14 @@ class PlaylistGenerator : public QObject {
 
 public slots:
     void recommendationCallback();
-    void calculate();
+    void callgetRecommendationSlot();
+    void searchGraphsSlot();
+
 
 signals:
-    void calculateSignal();
+    void callgetRecommendationSignal();
+    void searchGraphsSignal();
+
 
 
 public:

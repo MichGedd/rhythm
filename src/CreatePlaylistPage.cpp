@@ -463,7 +463,7 @@ bool alreadyInFinalGraph = false;
  playgen->generatePlaylists();
 
  //ADD THIS
- //playgen->addPlaylistToAccount();
+ playgen->addPlaylistToAccount();
 
 }
 

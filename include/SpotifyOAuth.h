@@ -8,6 +8,9 @@
 #include <QtNetwork>
 #include <QOAuth2AuthorizationCodeFlow>
 #include <string>
+#include <QFuture>
+#include <QtConcurrent>
+
 using namespace std;
 
 class SpotifyOAuth : public QObject {
@@ -35,9 +38,10 @@ private:
 
 public:
     string songToBeAdded;
-//    string playlistID;
-//    string topTrack;
-//    string topArtist;
+    string userID;
+    string topTrack;
+    string topGenre;
+    string topArtist;
 
 
     SpotifyOAuth(QObject *parent = nullptr);
@@ -57,9 +61,9 @@ public:
 //LINK: https://api.spotify.com/v1/recommendations
 //PURPOSE: Will return a list of recommended songs by the features given.  artists, genres, tracks are given above but there are more options
 //HEADERS: "Authorization:  " "Content-type: application/json"
-    void onGetRecommendations(vector<string> *songURL, vector<string> seed_emotions,vector<float> seed_values, QString seedGenre, QString seedArtists, QString seedTracks);
 
-    void runGetRecommendations();
+    void onGetRecommendations(vector<string> *songURL, unsigned int *currDur, vector<string> seed_emotions, vector<float> seed_values, QString seedGenre, QString seedArtists, QString seedTracks);
+    void runGetRecommendations(vector<string> *songURL,unsigned int *currDur, vector<string> seed_emotions,vector<float> seed_values,  QString seedGenre, QString seedArtists, QString seedTracks);
 
 
 //TYPE: GET
@@ -70,12 +74,10 @@ public:
     string getSongToBeAdded();
     void onGetTopTrack();
     void onGetTopArtist();
-    void createPlaylist();
+    void createPlaylist(string * PlaylistID);
     void addToPlaylist(std::string playlistID, std::string trackURI);
     void runAddtoPlaylist();
 
-    string onGetRecommendations(vector<string> songURL, vector<string> seed_emotions, vector<float> seed_values,
-                                QString seedGenre, QString seedArtists, QString seedTracks);
 };
 
 
