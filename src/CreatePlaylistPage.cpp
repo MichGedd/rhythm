@@ -1,5 +1,5 @@
-#include "CreatePlaylistPage.h"
-#include "ui_createplaylistpage.h"
+#include <CreatePlaylistPage.h>
+#include <ui_createplaylistpage.h>
 #include <PlaylistAlgorithm.h>
 
 int playlistLength =36;
