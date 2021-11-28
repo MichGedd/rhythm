@@ -8,8 +8,6 @@
 #include <HomePage.h>
 #include <SavedPlaylistPage.h>
 #include <CreatePlaylistPage.h>
-#include <EndPointTestPage.h>
-
 
 Application::Application(QObject *parent) : QObject(parent), oauth(), playGen(&oauth) {
     // Initialize container
@@ -40,15 +38,12 @@ Application::Application(QObject *parent) : QObject(parent), oauth(), playGen(&o
 
     SavedPlaylistPage *savedPlaylistPage = new SavedPlaylistPage;
 
-    EndPointTestPage *endPointTestPage = new EndPointTestPage(&oauth, &playGen);
-
     // Add pages to stacked widget
     this->stackedWidget = new QStackedWidget;
     this->stackedWidget->addWidget(loginPage);
     this->stackedWidget->addWidget(homePage);
     this->stackedWidget->addWidget(createPlaylistPage);
     this->stackedWidget->addWidget(savedPlaylistPage);
-    this->stackedWidget->addWidget(endPointTestPage);
 
     this->layout = new QVBoxLayout(window);
     this->layout->addWidget(this->stackedWidget);
@@ -60,7 +55,7 @@ Application::Application(QObject *parent) : QObject(parent), oauth(), playGen(&o
 }
 
 void Application::loginToMainPage() {
-    this->stackedWidget->setCurrentIndex(4);
+    this->stackedWidget->setCurrentIndex(1);
     this->navBar->show();
 }
 
