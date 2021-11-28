@@ -1,4 +1,4 @@
-#include "playlistAlgorithm.h"
+#include <PlaylistAlgorithm.h>
 using namespace std;
 
 //implementation of constructor method

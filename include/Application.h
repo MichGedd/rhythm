@@ -9,7 +9,7 @@
 #include <QMainWindow>
 #include <SpotifyOAuth.h>
 #include <NavBar.h>
-#include "playlistAlgorithm.h"
+#include <PlaylistAlgorithm.h>
 
 class Application : public QObject {
     Q_OBJECT

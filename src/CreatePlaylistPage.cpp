@@ -1,6 +1,6 @@
 #include "CreatePlaylistPage.h"
 #include "ui_createplaylistpage.h"
-#include "playlistAlgorithm.h"
+#include <PlaylistAlgorithm.h>
 
 int playlistLength =36;
 vector<graph> InputGraphs;
