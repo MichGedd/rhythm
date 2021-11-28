@@ -26,7 +26,6 @@ private slots:
     void switchToCreatePlaylist();
     void switchToSavedPlaylists();
     void switchToHomePage();
-    void switchToAPITESTPage();
 
 
 private:

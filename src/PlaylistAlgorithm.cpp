@@ -1,4 +1,5 @@
 #include <PlaylistAlgorithm.h>
+
 using namespace std;
 
 //implementation of constructor method
@@ -13,6 +14,7 @@ PlaylistGenerator::PlaylistGenerator(SpotifyOAuth *oauth, QObject *parent) : QOb
     connect(this, &PlaylistGenerator::searchGraphsSignal, this, &PlaylistGenerator::searchGraphsSlot);
 
 }
+
 PlaylistGenerator::PlaylistGenerator(QObject *parent) : QObject(parent) {
     oauth = nullptr;
     //convert playlistLength to ms from minutes
@@ -23,11 +25,10 @@ PlaylistGenerator::PlaylistGenerator(QObject *parent) : QObject(parent) {
 }
 
 
-
-void PlaylistGenerator::getGraphs(vector<graph> inputGraphs, int playlistLength){
+void PlaylistGenerator::getGraphs(vector<graph> inputGraphs, int playlistLength) {
     graphs = inputGraphs;
 
-    if(graphs.empty()){
+    if (graphs.empty()) {
         cout << "no graphs received";
     }
 
@@ -38,30 +39,23 @@ void PlaylistGenerator::getGraphs(vector<graph> inputGraphs, int playlistLength)
 }
 
 
+void PlaylistGenerator::generatePlaylists() {
+    songURIs.clear();
+    while (currentDuration_ms < playlistDuration_ms) {
+        emit searchGraphsSlot();
 
-void PlaylistGenerator::generatePlaylists(){
-        songURIs.clear();
-        while(currentDuration_ms < playlistDuration_ms){
-//            future<void> graphfunc = async(&PlaylistGenerator::searchGraphsSlot,this);
-            emit searchGraphsSlot();
-
-            //use target values structure to search for a song through Spotify API with all the requirements
-            //API code goes here
-//            calculate(variablename, variablevalue);
-
-            //ensure that the target.value is within the limits for the specific variable!!!!!
+        //use target values structure to search for a song through Spotify API with all the requirements
+        //API code goes here
+        //ensure that the target.value is within the limits for the specific variable!!!!!
         QString genres = "classical,country";
         QString tracks = "4NHQUGzhtTLFvgF5SZesLK";
         QString artists = "4NHQUGzhtTLFvgF5SZesLK";
-//        cout << "Reach here" << endl;
 
 
-        this->oauth->runGetRecommendations(&songURIs, &currentDuration_ms, variableNames, values, genres, artists, tracks);
-
-//        reccFunc.get();
-
+        this->oauth->runGetRecommendations(&songURIs, &currentDuration_ms, variableNames, values, genres, artists,
+                                           tracks);
     }
-    }
+}
 
 
 void PlaylistGenerator::addPlaylistToAccount() {
@@ -70,34 +64,30 @@ void PlaylistGenerator::addPlaylistToAccount() {
     this->oauth->createPlaylist(&playlistID);
     string trackURIs = "";
 
-    //onCreatePlaylist();
     //max of 100 at a time!
 
-    if(songURIs.size() > 100){
+    if (songURIs.size() > 100) {
         vector<string>::const_iterator first;
         vector<string>::const_iterator last;
-        for(int i = 0; i < songURIs.size(); i += 100) {
+        for (int i = 0; i < songURIs.size(); i += 100) {
             trackURIs = "";
             first = songURIs.begin() + i;
-            if(i + 99< songURIs.size()) {
+            if (i + 99 < songURIs.size()) {
                 last = songURIs.begin() + i + 99;
-            }
-            else{
+            } else {
                 last = songURIs.end();
             }
             vector<string> subset(first, last);
             for (int j = 0; j < subset.size(); j++) {
-                if (j == subset.size() - 1){
+                if (j == subset.size() - 1) {
                     trackURIs += subset[j];
-                }
-                else {
+                } else {
                     trackURIs += subset[j] + ',';
                 }
             }
             this->oauth->addToPlaylist(playlistID, trackURIs);
         }
-    }
-    else{
+    } else {
         cout << endl << "PLAYLIST ID " << playlistID << endl;
         for (int j = 0; j < songURIs.size(); j++) {
             if (j == songURIs.size() - 1) {
@@ -113,11 +103,11 @@ void PlaylistGenerator::addPlaylistToAccount() {
 }
 
 void PlaylistGenerator::clamp(float min, float max, float &number) {
-    if(number > max){
+    if (number > max) {
         number = max;
         return;
     }
-    if(number < min){
+    if (number < min) {
         number = min;
     }
 }
@@ -126,14 +116,12 @@ void PlaylistGenerator::clamp(float min, float max, float &number) {
 //SLOTS
 //============
 
-void PlaylistGenerator::recommendationCallback(){
+void PlaylistGenerator::recommendationCallback() {
     if (songURIs.empty()) {
         cout << "Empty" << endl;
     } else {
         cout << "SONGURI: " << songURIs[0] << endl;
         //UPDATE THE TIME
-
-//        currentDuration_ms += 3 * MS_IN_MINUTE;
     }
 }
 

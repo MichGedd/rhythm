@@ -76,10 +76,6 @@ void Application::switchToHomePage() {
     this->stackedWidget->setCurrentIndex(1);
 }
 
-void Application::switchToAPITESTPage() {
-    this->stackedWidget->setCurrentIndex(4);
-}
-
 
 
 
