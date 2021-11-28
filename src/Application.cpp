@@ -29,10 +29,11 @@ Application::Application(QObject *parent) : QObject(parent), oauth(), playGen(&o
 
     // Initialize pages
     LoginPage *loginPage = new LoginPage(&oauth);
-
     connect(&(this->oauth), &SpotifyOAuth::authenticated, this, &Application::loginToMainPage);
 
-    HomePage *homePage = new HomePage;
+    HomePage *homePage = new HomePage(&(this->oauth));
+    connect(&(this->oauth), &SpotifyOAuth::authenticated, homePage, &HomePage::refreshDisplayName);
+    connect(this->navBar, &NavBar::goToHomePage, homePage, &HomePage::refreshDisplayName);
 
     CreatePlaylistPage *createPlaylistPage = new CreatePlaylistPage(&playGen);
 

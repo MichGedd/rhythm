@@ -42,6 +42,7 @@ public:
     string topTrack;
     string topGenre;
     string topArtist;
+    string displayName;
 
 
     SpotifyOAuth(QObject *parent = nullptr);
