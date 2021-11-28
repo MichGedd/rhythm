@@ -31,17 +31,17 @@ SpotifyOAuth::SpotifyOAuth(QObject *parent) : QObject(parent) {
             emit authenticated();
         } else if (status == QAbstractOAuth::Status::NotAuthenticated) {
             std::cout << "Not Authorized\n";
-            emit authenticated();
+            //emit authenticated();
         } else if (status == QAbstractOAuth::Status::TemporaryCredentialsReceived) {
             std::cout << "Temporarily Authorized\n";
             // Do something when authenticated
 
-            emit authenticated();
+            //emit authenticated();
 
         } else if (status == QAbstractOAuth::Status::RefreshingToken) {
             std::cout << "Refreshing Token\n";
             // Do something when authenticated
-            emit authenticated();
+            //emit authenticated();
         }
         QString tempToken = getToken();
         std::cout << tempToken.toStdString() << std::endl;
@@ -64,19 +64,23 @@ void SpotifyOAuth::onGetUserInfo() {
     QUrl u("https://api.spotify.com/v1/me");
 
     auto reply = oauth2.get(u);
-    connect(reply, &QNetworkReply::finished, [=]() {
-        if (reply->error() != QNetworkReply::NoError) {
-            std::cout << reply->errorString().toStdString() << std::endl;
-            printf("ERROR IN NETWORK CONNECT");
-            return;
-        }
-        const auto data = reply->readAll();
-        const auto document = QJsonDocument::fromJson(data);
-        const auto root = document.object();
-        const auto userName = root.value("id").toString().toStdString();
-        this->userID = userName;
-        std::cout << userName << std::endl;
-    });
+
+    QEventLoop loop;
+    connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    loop.exec();
+
+    if (reply->error() != QNetworkReply::NoError) {
+        std::cout << reply->errorString().toStdString() << std::endl;
+        printf("ERROR IN NETWORK CONNECT");
+        return;
+    }
+    const auto data = reply->readAll();
+    const auto document = QJsonDocument::fromJson(data);
+    const auto root = document.object();
+    const auto userName = root.value("id").toString().toStdString();
+    this->userID = userName;
+    this->displayName = root.value("display_name").toString().toStdString();
+    std::cout << userName << std::endl;
 }
 
 void SpotifyOAuth::onGetRecommendations(vector<string> *songURL, unsigned int *currDur, vector<string> seed_emotions,
