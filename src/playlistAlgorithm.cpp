@@ -40,7 +40,7 @@ void PlaylistGenerator::getGraphs(vector<graph> inputGraphs, int playlistLength)
 
 
 void PlaylistGenerator::generatePlaylists(){
-
+        songURIs.clear();
         while(currentDuration_ms < playlistDuration_ms){
 //            future<void> graphfunc = async(&PlaylistGenerator::searchGraphsSlot,this);
             emit searchGraphsSlot();
@@ -68,7 +68,6 @@ void PlaylistGenerator::addPlaylistToAccount() {
     //search through list of songURIs
     string playlistID;
     this->oauth->createPlaylist(&playlistID);
-
     string trackURIs = "";
 
     //onCreatePlaylist();
