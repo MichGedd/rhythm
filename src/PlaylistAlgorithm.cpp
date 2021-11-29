@@ -58,10 +58,10 @@ void PlaylistGenerator::generatePlaylists() {
 }
 
 
-void PlaylistGenerator::addPlaylistToAccount() {
+void PlaylistGenerator::addPlaylistToAccount(string playlistName) {
     //search through list of songURIs
     string playlistID;
-    this->oauth->createPlaylist(&playlistID);
+    this->oauth->createPlaylist(&playlistID, playlistName);
     string trackURIs = "";
 
     //max of 100 at a time!
