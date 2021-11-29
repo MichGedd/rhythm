@@ -37,6 +37,8 @@ public:
     QRadioButton *radioButton;
     QPushButton *pushButton_2;
     QLabel *timeNote;
+    QLineEdit *playlistName;
+    QLabel *label;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -75,6 +77,12 @@ public:
         timeNote = new QLabel(centralwidget);
         timeNote->setObjectName(QString::fromUtf8("timeNote"));
         timeNote->setGeometry(QRect(20, 150, 241, 20));
+        playlistName = new QLineEdit(centralwidget);
+        playlistName->setObjectName(QString::fromUtf8("playlistName"));
+        playlistName->setGeometry(QRect(20, 190, 113, 21));
+        label = new QLabel(centralwidget);
+        label->setObjectName(QString::fromUtf8("label"));
+        label->setGeometry(QRect(174, 190, 65, 16));
         CreatePlaylistPage->setCentralWidget(centralwidget);
         menubar = new QMenuBar(CreatePlaylistPage);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -101,6 +109,8 @@ public:
         radioButton->setText(QCoreApplication::translate("CreatePlaylistPage", "Add Graph", nullptr));
         pushButton_2->setText(QCoreApplication::translate("CreatePlaylistPage", "Create Playlist", nullptr));
         timeNote->setText(QCoreApplication::translate("CreatePlaylistPage", "Note: Changing time will reset all graphs", nullptr));
+        playlistName->setText(QCoreApplication::translate("CreatePlaylistPage", "Rhythm Playlist", nullptr));
+        label->setText(QCoreApplication::translate("CreatePlaylistPage", "Playlist Name", nullptr));
     } // retranslateUi
 
 };

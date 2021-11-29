@@ -42,7 +42,7 @@ QListView {
     color: white;
 }
 
-QLabel#timeNote {
+QLabel {
     color: white;
 }
 
