@@ -40,6 +40,7 @@ void PlaylistGenerator::getGraphs(vector<graph> inputGraphs, int playlistLength)
 
 
 void PlaylistGenerator::generatePlaylists() {
+    emit playlistGenerating();
     songURIs.clear();
     while (currentDuration_ms < playlistDuration_ms) {
         emit searchGraphsSlot();
@@ -55,6 +56,8 @@ void PlaylistGenerator::generatePlaylists() {
         this->oauth->runGetRecommendations(&songURIs, &currentDuration_ms, variableNames, values, genres, artists,
                                            tracks);
     }
+
+    emit playlistCompleted();
 }
 
 

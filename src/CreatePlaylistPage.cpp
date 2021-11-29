@@ -14,6 +14,14 @@ CreatePlaylistPage::CreatePlaylistPage(PlaylistGenerator *playgen, QWidget *pare
 
     this->playgen = playgen;
 
+    this->buttonResetTimer = new QTimer();
+    this->buttonResetTimer->setInterval(5000);
+    this->buttonResetTimer->setSingleShot(true);
+    connect(buttonResetTimer, &QTimer::timeout, this, &CreatePlaylistPage::resetButton);
+
+    connect(playgen, &PlaylistGenerator::playlistGenerating, this, &CreatePlaylistPage::onPlaylistGenerating);
+    connect(playgen, &PlaylistGenerator::playlistCompleted, this, &CreatePlaylistPage::onPlaylistCreated);
+
 }
 
 CreatePlaylistPage::~CreatePlaylistPage() {
@@ -353,5 +361,18 @@ void CreatePlaylistPage::on_pushButton_2_clicked() {
     //ADD THIS
     playgen->addPlaylistToAccount();
 
+}
+
+void CreatePlaylistPage::onPlaylistGenerating() {
+    this->ui->pushButton_2->setText("Playlist Generating!");
+}
+
+void CreatePlaylistPage::onPlaylistCreated() {
+    this->ui->pushButton_2->setText("Playlist Created!");
+    this->buttonResetTimer->start();
+}
+
+void CreatePlaylistPage::resetButton() {
+    this->ui->pushButton_2->setText("Create Playlist");
 }
 

@@ -18,8 +18,12 @@ public:
 
 private slots:
     void on_pushButton_2_clicked();
+    void onPlaylistGenerating();
+    void onPlaylistCreated();
+    void resetButton();
 
 private:
     PlaylistGenerator *playgen;
     Ui::CreatePlaylistPage *ui;
+    QTimer *buttonResetTimer;
 };
