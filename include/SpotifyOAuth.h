@@ -75,7 +75,7 @@ public:
     string getSongToBeAdded();
     void onGetTopTrack();
     void onGetTopArtist();
-    void createPlaylist(string * PlaylistID);
+    void createPlaylist(string * PlaylistID, string playlistName);
     void addToPlaylist(std::string playlistID, std::string trackURI);
     void runAddtoPlaylist();
 

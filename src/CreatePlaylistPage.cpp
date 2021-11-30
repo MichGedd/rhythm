@@ -351,7 +351,7 @@ void CreatePlaylistPage::on_pushButton_2_clicked() {
     playgen->generatePlaylists();
 
     //ADD THIS
-    playgen->addPlaylistToAccount();
+    playgen->addPlaylistToAccount(this->ui->playlistName->text().toStdString());
 
 }
 

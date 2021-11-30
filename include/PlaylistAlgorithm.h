@@ -42,7 +42,7 @@ public:
     PlaylistGenerator(SpotifyOAuth *oauth, QObject *parent = nullptr);
     void getGraphs(vector<graph> inputGraphs, int playlistLength);
     void generatePlaylists();
-    void addPlaylistToAccount();
+    void addPlaylistToAccount(string playlistName);
 private:
     //list of graphs (contains variable name and all data points)
     SpotifyOAuth *oauth;
