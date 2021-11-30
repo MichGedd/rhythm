@@ -93,7 +93,8 @@ void SpotifyOAuth::onGetRecommendations(vector<string> *songURL, unsigned int *c
     QString input;
 
     for (int i = 0; i < seed_emotions.size(); i++) {
-        input = QString::fromStdString("target_" + seed_emotions[i]);
+        input = QString::fromStdString("target_" + seed_emotions[i]).toLower();
+        std::cout << "Input is " << input.toStdString() << endl;
         std::cout << "Seed value is " << seed_values[i] << "\n";
         parameters.insert(input, seed_values[i]);
     }
