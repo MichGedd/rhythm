@@ -1,11 +1,11 @@
 # Rhythm
 
 Rhythm is the evolution in playlist generation.  Rhythm is currently in version 1.1.  This master branch is a working copy
-of the software.  Releases can be found in branches "rhythm-major_version.minor_verion"
+of the software.  Releases can be found in the "release" zip file in the following branches.
 
 ## Release History
-- rhythm-1.0 - November 29 2021
-- rhythm-1.1 - November 30 2021
+- [rhythm-1.0](http://jira.caslab.queensu.ca:7990/projects/TN/repos/rhythm/browse?at=refs%2Fheads%2Frhythm-1.0) - November 29 2021
+- [rhythm-1.1](http://jira.caslab.queensu.ca:7990/projects/TN/repos/rhythm/browse?at=refs%2Fheads%2Frhythm-1.1) - November 30 2021
 
 ## Setup
 1) [Download Qt 5 Open Source Online Installer.](https://www.qt.io/download-qt-installer?hsCtaTracking=99d9dd4f-5681-48d2-b096-470725510d34%7C074ddad0-fdef-4e53-8aa8-5e8a876d6ab4)  
