@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'createplaylistpage.ui'
 **
-** Created by: Qt User Interface Compiler version 5.15.2
+** Created by: Qt User Interface Compiler version 5.15.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -60,6 +60,10 @@ public:
         comboBox->addItem(QString());
         comboBox->addItem(QString());
         comboBox->addItem(QString());
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
         comboBox->setObjectName(QString::fromUtf8("comboBox"));
         comboBox->setGeometry(QRect(330, 390, 270, 20));
         timeInput = new QLineEdit(centralwidget);
@@ -86,7 +90,7 @@ public:
         CreatePlaylistPage->setCentralWidget(centralwidget);
         menubar = new QMenuBar(CreatePlaylistPage);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 848, 20));
+        menubar->setGeometry(QRect(0, 0, 848, 26));
         CreatePlaylistPage->setMenuBar(menubar);
         statusbar = new QStatusBar(CreatePlaylistPage);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -101,8 +105,12 @@ public:
     {
         CreatePlaylistPage->setWindowTitle(QCoreApplication::translate("CreatePlaylistPage", "MainWindow", nullptr));
         comboBox->setItemText(0, QCoreApplication::translate("CreatePlaylistPage", "Energy", nullptr));
-        comboBox->setItemText(1, QCoreApplication::translate("CreatePlaylistPage", "Danceability", nullptr));
-        comboBox->setItemText(2, QCoreApplication::translate("CreatePlaylistPage", "Instrumentalness", nullptr));
+        comboBox->setItemText(1, QCoreApplication::translate("CreatePlaylistPage", "Acousticness", nullptr));
+        comboBox->setItemText(2, QCoreApplication::translate("CreatePlaylistPage", "Liveness", nullptr));
+        comboBox->setItemText(3, QCoreApplication::translate("CreatePlaylistPage", "Speechiness", nullptr));
+        comboBox->setItemText(4, QCoreApplication::translate("CreatePlaylistPage", "Valence", nullptr));
+        comboBox->setItemText(5, QCoreApplication::translate("CreatePlaylistPage", "Danceability", nullptr));
+        comboBox->setItemText(6, QCoreApplication::translate("CreatePlaylistPage", "Instrumentalness", nullptr));
 
         timeInput->setText(QCoreApplication::translate("CreatePlaylistPage", "20", nullptr));
         setTimeButton->setText(QCoreApplication::translate("CreatePlaylistPage", "Set Time", nullptr));
