@@ -24,7 +24,6 @@ private slots:
     void loginToMainPage();
     void logout();
     void switchToCreatePlaylist();
-    void switchToSavedPlaylists();
     void switchToHomePage();
 
 
