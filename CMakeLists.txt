@@ -17,11 +17,11 @@ add_subdirectory(external/qcustomplot)
 
 set(SOURCE_FILES
         src/main.cpp src/SpotifyOAuth.cpp src/LoginPage.cpp src/Application.cpp src/HomePage.cpp src/NavBar.cpp
-        src/SavedPlaylistPage.cpp include/CreatePlaylistPage.h include/PlaylistAlgorithm.h)
+        include/CreatePlaylistPage.h include/PlaylistAlgorithm.h)
 
 set(HEADER_FILES
         include/Application.h include/HomePage.h include/LoginPage.h include/SpotifyOAuth.h include/NavBar.h
-        include/SavedPlaylistPage.h src/CreatePlaylistPage.cpp src/PlaylistAlgorithm.cpp)
+        src/CreatePlaylistPage.cpp src/PlaylistAlgorithm.cpp)
 
 
 add_executable(rhythm ${HEADER_FILES} ${SOURCE_FILES})

@@ -6,7 +6,6 @@
 #include <Application.h>
 #include <LoginPage.h>
 #include <HomePage.h>
-#include <SavedPlaylistPage.h>
 #include <CreatePlaylistPage.h>
 
 Application::Application(QObject *parent) : QObject(parent), oauth(), playGen(&oauth) {
@@ -24,8 +23,10 @@ Application::Application(QObject *parent) : QObject(parent), oauth(), playGen(&o
     this->navBar->raise();
     connect(this->navBar, &NavBar::logout, this, &Application::logout);
     connect(this->navBar, &NavBar::goToCreatePlaylist, this, &Application::switchToCreatePlaylist);
-    connect(this->navBar, &NavBar::goToSavedPlaylist, this, &Application::switchToSavedPlaylists);
     connect(this->navBar, &NavBar::goToHomePage, this, &Application::switchToHomePage);
+    connect(this->navBar, &NavBar::goToSavedPlaylist, [=]{
+        QDesktopServices::openUrl(QUrl("https://open.spotify.com/collection/playlists"));
+    });
 
     // Initialize pages
     LoginPage *loginPage = new LoginPage(&oauth);
@@ -37,14 +38,11 @@ Application::Application(QObject *parent) : QObject(parent), oauth(), playGen(&o
 
     CreatePlaylistPage *createPlaylistPage = new CreatePlaylistPage(&playGen);
 
-    SavedPlaylistPage *savedPlaylistPage = new SavedPlaylistPage;
-
     // Add pages to stacked widget
     this->stackedWidget = new QStackedWidget;
     this->stackedWidget->addWidget(loginPage);
     this->stackedWidget->addWidget(homePage);
     this->stackedWidget->addWidget(createPlaylistPage);
-    this->stackedWidget->addWidget(savedPlaylistPage);
 
     this->layout = new QVBoxLayout(window);
     this->layout->addWidget(this->stackedWidget);
@@ -67,10 +65,6 @@ void Application::logout() {
 
 void Application::switchToCreatePlaylist() {
     this->stackedWidget->setCurrentIndex(2);
-}
-
-void Application::switchToSavedPlaylists() {
-    this->stackedWidget->setCurrentIndex(3);
 }
 
 void Application::switchToHomePage() {
