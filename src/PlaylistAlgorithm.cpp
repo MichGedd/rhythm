@@ -42,15 +42,20 @@ void PlaylistGenerator::getGraphs(vector<graph> inputGraphs, int playlistLength)
 void PlaylistGenerator::generatePlaylists() {
     emit playlistGenerating();
     songURIs.clear();
+
     while (currentDuration_ms < playlistDuration_ms) {
         emit searchGraphsSlot();
 
         //use target values structure to search for a song through Spotify API with all the requirements
         //API code goes here
         //ensure that the target.value is within the limits for the specific variable!!!!!
-        QString genres = "classical,country";
-        QString tracks = "4NHQUGzhtTLFvgF5SZesLK";
-        QString artists = "4NHQUGzhtTLFvgF5SZesLK";
+        QString genres = "country,rock,pop";
+        //QString tracks = "4NHQUGzhtTLFvgF5SZesLK";
+        //QString artists = "4NHQUGzhtTLFvgF5SZesLK";
+
+        //QString genres = QString::fromStdString(this->oauth->topGenre);
+        QString tracks = QString::fromStdString(this->oauth->topTrack);
+        QString artists = QString::fromStdString(this->oauth->topArtist);
 
 
         this->oauth->runGetRecommendations(&songURIs, &currentDuration_ms, variableNames, values, genres, artists,
@@ -150,7 +155,7 @@ void PlaylistGenerator::searchGraphsSlot() {
         //convert currentDuration into minutes for calculation
         float value =
                 slope * (currentDuration_ms / MS_IN_MINUTE - g.points[i - 1].time_minutes) + g.points[i - 1].value;
-        values.push_back(value);
+        values.push_back(value / 100.0f);
 
 
         //add the target to the list of targets to use for recommendations

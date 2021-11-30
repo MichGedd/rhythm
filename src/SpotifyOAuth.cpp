@@ -93,7 +93,9 @@ void SpotifyOAuth::onGetRecommendations(vector<string> *songURL, unsigned int *c
     QString input;
 
     for (int i = 0; i < seed_emotions.size(); i++) {
-        input = QString::fromStdString("target_" + seed_emotions[i]);
+        input = QString::fromStdString("target_" + seed_emotions[i]).toLower();
+        std::cout << "Input is " << input.toStdString() << endl;
+        std::cout << "Seed value is " << seed_values[i] << "\n";
         parameters.insert(input, seed_values[i]);
     }
 
@@ -126,8 +128,10 @@ void SpotifyOAuth::onGetRecommendations(vector<string> *songURL, unsigned int *c
     const auto root = document.object();
     const QString trackNames = root.value("tracks").toArray()[0].toObject().value("uri").toString();
     const int trackDuration = root.value("tracks").toArray()[0].toObject().value("duration_ms").toInt(); //SONG DURATION
+    const QString name = root.value("tracks").toArray()[0].toObject().value("name").toString();
 
     cout << trackNames.toStdString() << endl;
+    cout << "Track Name is " << name.toStdString() << endl;
     *currDur = *currDur + trackDuration;
     songURL->push_back(trackNames.toStdString());
 
@@ -159,9 +163,10 @@ void SpotifyOAuth::onGetTopTrack() {
         }
         //Return track URI
         QString trackNames = root.value("items").toArray()[0].toObject().value("uri").toString();
-        this->topTrack = trackNames.toStdString();
+        QString track = root.value("items").toArray()[0].toObject().value("id").toString();
+        this->topTrack = track.toStdString();
 
-        std::cout << trackNames.toStdString() << std::endl;
+        std::cout << track.toStdString() << std::endl;
     });
 
 }
@@ -187,9 +192,10 @@ void SpotifyOAuth::onGetTopArtist() {
         }
         //Return artist URI
         const auto topArtist = root.value("items").toArray()[0].toObject().value("uri").toString();
+        const auto artist = root.value("items").toArray()[0].toObject().value("id").toString();
         const auto topGenres = root.value("items").toArray()[0].toObject().value("genres").toArray()[0].toString();
 
-        this->topArtist = topArtist.toStdString();
+        this->topArtist = artist.toStdString();
         this->topGenre = topGenres.toStdString();
 
         return;

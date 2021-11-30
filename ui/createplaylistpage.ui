@@ -53,6 +53,26 @@
     </item>
     <item>
      <property name="text">
+      <string>Acousticness</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Liveness</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Speechiness</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Valence</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
       <string>Danceability</string>
      </property>
     </item>
@@ -145,7 +165,7 @@
      <rect>
       <x>174</x>
       <y>190</y>
-      <width>65</width>
+      <width>81</width>
       <height>16</height>
      </rect>
     </property>
@@ -160,7 +180,7 @@
      <x>0</x>
      <y>0</y>
      <width>848</width>
-     <height>20</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>
