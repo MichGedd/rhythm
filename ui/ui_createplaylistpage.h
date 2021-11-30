@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'createplaylistpage.ui'
 **
-** Created by: Qt User Interface Compiler version 5.15.0
+** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -86,11 +86,11 @@ public:
         playlistName->setGeometry(QRect(20, 190, 113, 21));
         label = new QLabel(centralwidget);
         label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(174, 190, 65, 16));
+        label->setGeometry(QRect(174, 190, 81, 16));
         CreatePlaylistPage->setCentralWidget(centralwidget);
         menubar = new QMenuBar(CreatePlaylistPage);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 848, 26));
+        menubar->setGeometry(QRect(0, 0, 848, 25));
         CreatePlaylistPage->setMenuBar(menubar);
         statusbar = new QStatusBar(CreatePlaylistPage);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
