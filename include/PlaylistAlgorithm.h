@@ -34,7 +34,8 @@ public slots:
 signals:
     void callgetRecommendationSignal();
     void searchGraphsSignal();
-
+    void playlistGenerating();
+    void playlistCompleted();
 
 
 public:
