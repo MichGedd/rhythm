@@ -1,5 +1,19 @@
 # Rhythm
 
+---
+
+Note: This is an archive of rhythm, the ELEC 320 course project by Team 5 - Tango Nuevo. Credit to
+
+- Michael Geddes
+- Harrison Gordon
+- Connor Massey
+- Tony Zheng
+- Nicholas Kriskapa
+- Joe Ajoy
+- Peter Danilin
+
+---
+
 Rhythm is the evolution in playlist generation.  Rhythm is currently in version 1.1.  This master branch is a working copy
 of the software.  Releases can be found in the "release" zip file in the following branches.
 
